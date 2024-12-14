@@ -1,0 +1,60 @@
+.imageContainer{
+    margin: 1% 0%;
+}
+
+.breadcrumbsContainer{
+    margin: 1.5% 3% 1.5% 10%;
+    background-color: aliceblue;
+    padding: 1% 2%;
+}
+
+.breadcrumbsContainer p{
+    font-size: 1.25rem;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    word-spacing: 2.2px;
+    color: blueviolet;
+}
+
+.breadcrumbsContainer span{
+    padding-right: 1.5%;
+}
+
+.breadcrumbsLink:hover{
+    color: darkmagenta;
+    text-decoration: underline;
+}
+
+.facilityContainer{
+    margin: 5% 12%;
+}
+
+.facilityContainer h2{
+    font-size: 1.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    margin-bottom: 2%;
+    word-spacing: 15px;
+    letter-spacing: 2px;
+}
+
+.facilityContainer p{
+    margin: 1% 0%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-style: italic;
+    word-spacing: 10px;
+    line-height: 190%;
+}
+
+.facilityContainer ol{
+    margin: 2%;
+}
+
+.facilityContainer li{
+    padding: 1% 0%
+}
+
+.facilityContainer li:hover{
+    cursor: pointer;
+    color: darkgoldenrod;
+}

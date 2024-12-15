@@ -63,6 +63,7 @@ async function fetchMeetingEventsRoomInformation(){
         console.log("meetingEventRoomInfo" + meetingEventRoomInfo);
         return meetingEventRoomInfo;
     } catch (error) {
+        console.log("Error while fetching meeting event data");
         console.log(error);
     }
 }

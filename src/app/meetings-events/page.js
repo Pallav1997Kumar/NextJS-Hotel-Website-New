@@ -58,6 +58,8 @@ async function fetchMeetingEventsRoomInformation(){
     try {
         console.log("process.env.URL" + process.env.URL);
         const response = await fetch(`${process.env.URL}/api/hotel-booking-information/events-meeting-room-information/`);
+        const r1 = JSON.stringify(response);
+        console.log("62 line + " + r1);
         console.log("response" + response);
         const meetingEventRoomInfo = await response.json();
         console.log("meetingEventRoomInfo" + meetingEventRoomInfo);

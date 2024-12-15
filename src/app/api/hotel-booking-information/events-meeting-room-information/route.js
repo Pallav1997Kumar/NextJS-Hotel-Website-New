@@ -3,7 +3,7 @@ import meetingEventsRooms from "@/json objects/meetingEventsRooms.js"
 
 function GET(){
     
-    console.log(meetingEventsRooms);
+    console.log("meetingEventsRooms" + meetingEventsRooms);
     return NextResponse.json(
         {meetingEventsRooms}
     );

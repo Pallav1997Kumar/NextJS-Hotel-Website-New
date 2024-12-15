@@ -18,6 +18,7 @@ export default async function page(){
 
     const meetingEventRoomInfo = await fetchMeetingEventsRoomInformation();
     const meetingEventsRooms = meetingEventRoomInfo.meetingEventsRooms;
+    console.log(meetingEventsRooms);
 
     return (
         <React.Fragment>

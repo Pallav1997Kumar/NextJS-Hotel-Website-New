@@ -58,7 +58,7 @@ function Navbar(){
                     </li>
                 </ul>
             </div>
-            {/* {(loginUserId == null) &&
+            {(loginUserId == null) &&
             <div className={styles.loginCartRouting}>
                 <ul>
                     <li>
@@ -69,8 +69,8 @@ function Navbar(){
                     </li>
                 </ul>
             </div>
-            } */}
-            {/* {(loginUserDetails != null) &&
+            }
+            {(loginUserDetails != null) &&
             <div className={styles.userProfileRouting}>
                 <ul>
                     <li>
@@ -80,7 +80,7 @@ function Navbar(){
                     </li>
                 </ul>
             </div>
-            } */}
+            }
         </div>
     );
 }

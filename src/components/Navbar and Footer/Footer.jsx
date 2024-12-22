@@ -101,7 +101,7 @@ function Footer() {
                <li>
                   <Link href="/contactUs">Contact Us</Link>
                </li>
-               {/* <li>
+               <li>
                   <Link onClick={loginClickHandler} href="/login">Login</Link>
                </li>
                <li>
@@ -109,7 +109,7 @@ function Footer() {
                </li>
                <li>
                   <Link href="/cart">My Cart</Link>
-               </li> */}
+               </li>
             </ul>
         </div>
     </div>

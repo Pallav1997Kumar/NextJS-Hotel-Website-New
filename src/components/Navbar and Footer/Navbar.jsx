@@ -41,7 +41,7 @@ function Navbar(){
                     <li>
                         <Link href="/">Home</Link>
                     </li>
-                    <li>
+                    {/* <li>
                         <Link href="/rooms-suites/">Rooms & Suites</Link>
                     </li>
                     <li>
@@ -49,7 +49,7 @@ function Navbar(){
                     </li>
                     <li>
                         <Link href="/meetings-events/">Event/Meeting Rooms</Link>
-                    </li>
+                    </li> */}
                     <li>
                         <Link href="/contactUs">Contact Us</Link>
                     </li>
@@ -58,7 +58,7 @@ function Navbar(){
                     </li>
                 </ul>
             </div>
-            {(loginUserId == null) &&
+            {/* {(loginUserId == null) &&
             <div className={styles.loginCartRouting}>
                 <ul>
                     <li>
@@ -69,8 +69,8 @@ function Navbar(){
                     </li>
                 </ul>
             </div>
-            }
-            {(loginUserDetails != null) &&
+            } */}
+            {/* {(loginUserDetails != null) &&
             <div className={styles.userProfileRouting}>
                 <ul>
                     <li>
@@ -80,7 +80,7 @@ function Navbar(){
                     </li>
                 </ul>
             </div>
-            }
+            } */}
         </div>
     );
 }

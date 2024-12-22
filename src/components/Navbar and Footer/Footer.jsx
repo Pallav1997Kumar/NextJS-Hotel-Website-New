@@ -83,7 +83,7 @@ function Footer() {
                <li>
                   <Link href="/">Home</Link>
                </li>
-               <li>
+               {/* <li>
                   <Link href="/rooms-suites/">Rooms and Suites</Link>
                </li>
                <li>
@@ -91,7 +91,7 @@ function Footer() {
                </li>
                <li>
                   <Link href="/meetings-events/">Events/ Meeting Rooms</Link>
-               </li>
+               </li> */}
                <li>
                   <Link href="/facility-in-our-hotel">Facilities</Link>
                </li>
@@ -101,7 +101,7 @@ function Footer() {
                <li>
                   <Link href="/contactUs">Contact Us</Link>
                </li>
-               <li>
+               {/* <li>
                   <Link onClick={loginClickHandler} href="/login">Login</Link>
                </li>
                <li>
@@ -109,7 +109,7 @@ function Footer() {
                </li>
                <li>
                   <Link href="/cart">My Cart</Link>
-               </li>
+               </li> */}
             </ul>
         </div>
     </div>

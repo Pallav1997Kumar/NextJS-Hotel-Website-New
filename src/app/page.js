@@ -5,9 +5,9 @@ import styles from "./page.module.css";
 
 import BasicContactInformation from "@/components/Home Page Components/BasicContactInformation.jsx";
 import HomePageHotelIntroduction from "@/components/Home Page Components/HomePageHotelIntroduction.jsx";
-// import RoomsAndSuitesComponent from "@/components/Home Page Components/RoomsAndSuitesComponent.jsx";
-// import DiningComponent from "@/components/Home Page Components/DiningComponent.jsx";
-// import EventsMeetingComponent from "@/components/Home Page Components/EventsMeetingComponent.jsx";
+import RoomsAndSuitesComponent from "@/components/Home Page Components/RoomsAndSuitesComponent.jsx";
+import DiningComponent from "@/components/Home Page Components/DiningComponent.jsx";
+import EventsMeetingComponent from "@/components/Home Page Components/EventsMeetingComponent.jsx";
 import HotelFacilitiesComponent from "@/components/Home Page Components/HotelFacilitiesComponent.jsx";
 
 
@@ -28,9 +28,9 @@ export default function Home() {
       <h4 className={styles.hotelSubIntro}>5 Star Hotel in Kolkata near Victoria Memorial</h4>
       <BasicContactInformation />
       <HomePageHotelIntroduction />
-      {/* <RoomsAndSuitesComponent />
+      <RoomsAndSuitesComponent />
       <DiningComponent />
-      <EventsMeetingComponent /> */}
+      <EventsMeetingComponent />
       <HotelFacilitiesComponent />
     </React.Fragment>
   );

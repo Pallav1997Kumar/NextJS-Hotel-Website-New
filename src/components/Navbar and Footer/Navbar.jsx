@@ -41,7 +41,7 @@ function Navbar(){
                     <li>
                         <Link href="/">Home</Link>
                     </li>
-                    {/* <li>
+                    <li>
                         <Link href="/rooms-suites/">Rooms & Suites</Link>
                     </li>
                     <li>
@@ -49,7 +49,7 @@ function Navbar(){
                     </li>
                     <li>
                         <Link href="/meetings-events/">Event/Meeting Rooms</Link>
-                    </li> */}
+                    </li>
                     <li>
                         <Link href="/contactUs">Contact Us</Link>
                     </li>

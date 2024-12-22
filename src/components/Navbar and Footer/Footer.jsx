@@ -83,7 +83,7 @@ function Footer() {
                <li>
                   <Link href="/">Home</Link>
                </li>
-               {/* <li>
+               <li>
                   <Link href="/rooms-suites/">Rooms and Suites</Link>
                </li>
                <li>
@@ -91,7 +91,7 @@ function Footer() {
                </li>
                <li>
                   <Link href="/meetings-events/">Events/ Meeting Rooms</Link>
-               </li> */}
+               </li>
                <li>
                   <Link href="/facility-in-our-hotel">Facilities</Link>
                </li>

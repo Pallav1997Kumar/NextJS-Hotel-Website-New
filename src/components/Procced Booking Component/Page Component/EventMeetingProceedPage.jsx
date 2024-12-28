@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useEffect } from "react";
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import Button from '@mui/material/Button';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
@@ -16,6 +17,7 @@ import { EVENT_AND_MEETING_ROOMS_BOOKING_PROCESS_SUCCESSFUL } from "@/constant s
 
 function EventMeetingProceedPage(props){
     const dispatch = useAppDispatch();
+    const router = useRouter();
 
     const loginUserDetails = useAppSelector((reduxStore)=> reduxStore.userSlice.loginUserDetails);
     const loginUserId = loginUserDetails.userId;
@@ -69,6 +71,7 @@ function EventMeetingProceedPage(props){
             const data = await response.json();
             if(response.status === 200 && data.message === EVENT_AND_MEETING_ROOMS_BOOKING_PROCESS_SUCCESSFUL){
                 dispatch(resetEventMeetingBookingInfo());
+                router.push(`/profile-home-page/view-current-bookings/${loginUserId}`);
             }
         }
         catch (error) {

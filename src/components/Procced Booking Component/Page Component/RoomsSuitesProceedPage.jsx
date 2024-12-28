@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useEffect } from "react";
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import Button from '@mui/material/Button';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
@@ -16,6 +17,7 @@ import { resetRoomSuiteBookingInfo } from "@/redux store/features/Booking Inform
 
 function RoomsSuitesProceedPage(props){
     const dispatch = useAppDispatch();
+    const router = useRouter();
 
     const loginUserDetails = useAppSelector((reduxStore)=> reduxStore.userSlice.loginUserDetails);
     const loginUserId = loginUserDetails.userId;
@@ -68,6 +70,7 @@ function RoomsSuitesProceedPage(props){
             const data = await response.json();
             if(response.status === 200 && data.message === ROOMS_SUITES_BOOKING_PROCESS_SUCCESSFUL){
                 dispatch(resetRoomSuiteBookingInfo());
+                router.push(`/profile-home-page/view-current-bookings/${loginUserId}`);
             }
         }
         catch (error) {

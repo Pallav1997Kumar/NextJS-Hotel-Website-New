@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Image from 'next/image';
 import Button from '@mui/material/Button';
+import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 
@@ -16,6 +17,7 @@ import { DINING_BOOKING_PROCESS_SUCCESSFUL } from "@/constant string files/apiSu
 
 function DiningProceedPage(props){
     const dispatch = useAppDispatch();
+    const router = useRouter();
     
     const loginUserDetails = useAppSelector((reduxStore)=> reduxStore.userSlice.loginUserDetails);
     const loginUserId = loginUserDetails.userId;
@@ -68,6 +70,7 @@ function DiningProceedPage(props){
             const data = await response.json();
             if(response.status === 200 && data.message === DINING_BOOKING_PROCESS_SUCCESSFUL){
                 dispatch(resetDiningBookingInfo());
+                router.push(`/profile-home-page/view-current-bookings/${loginUserId}`);
             }
         }
         catch (error) {

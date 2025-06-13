@@ -1,13 +1,15 @@
 'use client'
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import Button from '@mui/material/Button';
+import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import Link from 'next/link';
 
 import styles from "./AddMoneyInAccount.module.css";
 
-import { useAppSelector } from "@/redux store/hooks.js";
+import { useAppDispatch, useAppSelector } from "@/redux store/hooks.js";
+import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
 import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
 import { incorrectCardDetailsErrorConstant } from "@/constant string files/incorrectCardDetailsErrorConstant.js"
 
@@ -15,6 +17,24 @@ import { incorrectCardDetailsErrorConstant } from "@/constant string files/incor
 function AddMoneyInAccount(){
 
     const loginUserDetails = useAppSelector((reduxStore)=> reduxStore.userSlice.loginUserDetails);
+
+    const dispatch = useAppDispatch();
+    const router = useRouter();
+
+    useEffect(function() {
+        if (loginUserDetails == null) {
+            const loginPageCalledFrom = 'Add Balance to Account Page';
+            const loginRedirectPage = '/profile-home-page';
+            dispatch(updateLoginPageCalledFrom(loginPageCalledFrom));
+            dispatch(updateLoginRedirectPage(loginRedirectPage));
+            router.push('/login');
+        }
+    }, [loginUserDetails, dispatch, router]);
+
+    if(loginUserDetails == null){
+        return null;
+    }
+
     const loginUserId = loginUserDetails.userId;
 
     const [showAmountContainer, setShowAmountContainer] = useState(true);
@@ -168,7 +188,7 @@ function AddMoneyInAccount(){
                     errorStateMessage.expiryMonthErrorMessage = incorrectCardDetailsErrorConstant.INVALID_EXIPY_MONTH;
                 }
                 if(expiryYear.toString().length !== 4){
-                    errorStateMessage.expiryYearErrorMessage = incorrectCardDetailsErrorConstantINVALID_EXPIRY_YEAR;
+                    errorStateMessage.expiryYearErrorMessage = incorrectCardDetailsErrorConstant.INVALID_EXPIRY_YEAR;
                 }
             }
         }

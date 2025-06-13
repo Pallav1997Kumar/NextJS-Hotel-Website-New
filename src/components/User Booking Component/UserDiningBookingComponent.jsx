@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 import styles from './UserBookingComponent.module.css';
 
-import EachRoomBookingInfo from "@/components/Booking Information Component/Rooms Suites Booking/EachRoomBookingInfo.jsx"
+import EachDiningBookingInfo from "@/components/Booking Information Component/Dining Booking/EachDiningBookingInfo.jsx";
 import { 
     DATE_BOOKED_ASCENDING, 
     DATE_BOOKED_DESCENDING,
@@ -18,48 +18,48 @@ import {
 } from "@/constant string files/bookingViewSortingConstants.js";
 
 
-function UserRoomsSuitesBookingComponent(props){
+function UserDiningBookingComponent(props){
 
-    const roomSuitesBookingInfo = props.roomSuitesBookingInfo;
+    const diningBookingInfo = props.diningBookingInfo;
 
     const [sortSelection, setSortSelection] = useState("");
 
     if(sortSelection !== ""){
 
         if(sortSelection === DATE_BOOKED_ASCENDING){
-            roomSuitesBookingInfo.sort(function(a,b){
-                const dateA = new Date(a.transactionDetails.transactionDateTime);
-                const dateB = new Date(b.transactionDetails.transactionDateTime);
+            diningBookingInfo.sort(function(a,b){
+                const dateA = new Date(a.bookingInfo.transactionDetails.transactionDateTime);
+                const dateB = new Date(b.bookingInfo.transactionDetails.transactionDateTime);
                 return  dateA - dateB;
             });
         }
         else if(sortSelection === DATE_BOOKED_DESCENDING){
-            roomSuitesBookingInfo.sort(function(a,b){
-                const dateA = new Date(a.transactionDetails.transactionDateTime);
-                const dateB = new Date(b.transactionDetails.transactionDateTime);
+            diningBookingInfo.sort(function(a,b){
+                const dateA = new Date(a.bookingInfo.transactionDetails.transactionDateTime);
+                const dateB = new Date(b.bookingInfo.transactionDetails.transactionDateTime);
                 return  dateB - dateA;
             });
         }
 
         else if(sortSelection === DATE_OF_BOOKING_ASCENDING){
-            roomSuitesBookingInfo.sort(function(a,b){
-                const dateA = new Date(a.bookingInfo.bookingCheckoutDate);
-                const dateB = new Date(b.bookingInfo.bookingCheckoutDate);
+            diningBookingInfo.sort(function(a,b){
+                const dateA = new Date(a.bookingInfo.tableBookingDate);
+                const dateB = new Date(b.bookingInfo.tableBookingDate);
                 return  dateA - dateB;
             });
         }
         else if(sortSelection === DATE_OF_BOOKING_DESCENDING){
-            roomSuitesBookingInfo.sort(function(a,b){
-                const dateA = new Date(a.bookingInfo.bookingCheckoutDate);
-                const dateB = new Date(b.bookingInfo.bookingCheckoutDate);
+            diningBookingInfo.sort(function(a,b){
+                const dateA = new Date(a.bookingInfo.tableBookingDate);
+                const dateB = new Date(b.bookingInfo.tableBookingDate);
                 return  dateB - dateA;
             });
         }
 
         else if(sortSelection === TITLE_ASCENDING){
-            roomSuitesBookingInfo.sort(function(a,b){
-                const titleA = a.bookingInfo.bookingRoomTitle;
-                const titleB = b.bookingInfo.bookingRoomTitle;
+            diningBookingInfo.sort(function(a,b){
+                const titleA = a.bookingInfo.diningRestaurantTitle;
+                const titleB = b.bookingInfo.diningRestaurantTitle;
                 if(titleA > titleB){
                     return 1;
                 }
@@ -70,9 +70,9 @@ function UserRoomsSuitesBookingComponent(props){
             });
         }
         else if(sortSelection === TITLE_DESCENDING){
-            roomSuitesBookingInfo.sort(function(a,b){
-                const titleA = a.bookingInfo.bookingRoomTitle;;
-                const titleB = b.bookingInfo.bookingRoomTitle;
+            diningBookingInfo.sort(function(a,b){
+                const titleA = a.bookingInfo.diningRestaurantTitle;;
+                const titleB = b.bookingInfo.diningRestaurantTitle;
                 if(titleA > titleB){
                     return -1;
                 }
@@ -84,9 +84,9 @@ function UserRoomsSuitesBookingComponent(props){
         }
 
         else if(sortSelection === TOTAL_PRICE_ASCENDING){
-            roomSuitesBookingInfo.sort(function(a,b){
-                const totalPriceA = a.bookingInfo.totalPriceOfAllRooms;
-                const totalPriceB = b.bookingInfo.totalPriceOfAllRooms;
+            diningBookingInfo.sort(function(a,b){
+                const totalPriceA = a.bookingInfo.priceForBooking;
+                const totalPriceB = b.bookingInfo.priceForBooking;
                 if(totalPriceA > totalPriceB){
                     return 1;
                 }
@@ -97,9 +97,9 @@ function UserRoomsSuitesBookingComponent(props){
             });
         }
         else if(sortSelection === TOTAL_PRICE_DESCENDING){
-            roomSuitesBookingInfo.sort(function(a,b){
-                const totalPriceA = a.bookingInfo.totalPriceOfAllRooms;
-                const totalPriceB = b.bookingInfo.totalPriceOfAllRooms;
+            diningBookingInfo.sort(function(a,b){
+                const totalPriceA = a.bookingInfo.priceForBooking;
+                const totalPriceB = b.bookingInfo.priceForBooking;
                 if(totalPriceA > totalPriceB){
                     return -1;
                 }
@@ -111,9 +111,9 @@ function UserRoomsSuitesBookingComponent(props){
         }
 
         else if(sortSelection === NUMBER_OF_GUESTS_ASCENDING){
-            roomSuitesBookingInfo.sort(function(a,b){
-                const noOfGuestA = a.bookingInfo.totalGuest;
-                const noOfGuestB = b.bookingInfo.totalGuest;
+            diningBookingInfo.sort(function(a,b){
+                const noOfGuestA = a.bookingInfo.noOfGuests;
+                const noOfGuestB = b.bookingInfo.noOfGuests;
                 if(noOfGuestA > noOfGuestB){
                     return 1;
                 }
@@ -124,9 +124,9 @@ function UserRoomsSuitesBookingComponent(props){
             });
         }
         else if(sortSelection === NUMBER_OF_GUESTS_DESCENDING){
-            roomSuitesBookingInfo.sort(function(a,b){
-                const noOfGuestA = a.bookingInfo.totalGuest;
-                const noOfGuestB = b.bookingInfo.totalGuest;
+            diningBookingInfo.sort(function(a,b){
+                const noOfGuestA = a.bookingInfo.noOfGuests;
+                const noOfGuestB = b.bookingInfo.noOfGuests;
                 if(noOfGuestA > noOfGuestB){
                     return -1;
                 }
@@ -160,14 +160,14 @@ function UserRoomsSuitesBookingComponent(props){
                 </select>
             </div>
 
-            {roomSuitesBookingInfo.map(function(eachRoomBookingInfo){
-                const roomBookingInfo =  eachRoomBookingInfo.bookingInfo; 
-                const transactionDetails = eachRoomBookingInfo.transactionDetails;
-                return <EachRoomBookingInfo eachRoomBookingInfo={roomBookingInfo} transactionDetails={transactionDetails} />
+            {diningBookingInfo.map(function(eachDiningBookingInfo){
+                const diningBookingInfo =  eachDiningBookingInfo.bookingInfo; 
+                const transactionDetails = diningBookingInfo.transactionDetails;
+                return <EachDiningBookingInfo eachDiningBookingInfo={diningBookingInfo} transactionDetails={transactionDetails} />
             })}
         </div>
     );
 
 }
 
-export default UserRoomsSuitesBookingComponent;
+export default UserDiningBookingComponent;

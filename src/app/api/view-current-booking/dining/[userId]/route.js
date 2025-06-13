@@ -50,11 +50,6 @@ async function GET(NextRequest, context){
                 {
                     $project: {
                         bookingInfo: "$$ROOT",
-                        'transactionDetails._id': 1,
-                        'transactionDetails.transactionAmount': 1,
-                        'transactionDetails.transactionType': 1,
-                        'transactionDetails.transactionDescription': 1,
-                        'transactionDetails.transactionDateTime': 1,
                     }
                 }
             ]);
@@ -98,4 +93,4 @@ async function GET(NextRequest, context){
 }
 
 
-export { GET }
+export { GET };

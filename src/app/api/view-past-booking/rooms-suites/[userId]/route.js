@@ -34,7 +34,7 @@ async function GET(NextRequest, context){
                 },
                 {
                     $lookup: {
-                        from: 'hotelcustomerstransactions', // Ensure this matches the collection name in the database
+                        from: 'hotelcustomerstransactions', 
                         localField: 'transactionId',
                         foreignField: '_id',
                         as: 'transactionDetails'
@@ -43,17 +43,12 @@ async function GET(NextRequest, context){
                 {
                     $unwind: {
                         path: '$transactionDetails',
-                        preserveNullAndEmptyArrays: true // Optional, if you want to keep bookings without transactions
+                        preserveNullAndEmptyArrays: true 
                     }
                 },
                 {
                     $project: {
                         bookingInfo: "$$ROOT",
-                        'transactionDetails._id': 1,
-                        'transactionDetails.transactionAmount': 1,
-                        'transactionDetails.transactionType': 1,
-                        'transactionDetails.transactionDescription': 1,
-                        'transactionDetails.transactionDateTime': 1,
                     }
                 }
             ]);

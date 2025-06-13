@@ -26,12 +26,6 @@ async function GET(NextRequest, context){
         const hotelUser = await HotelCustomersUsers.findById(loginUserId);
 
         if(hotelUser){
-            // const eventMeetingSingleDateUserBookingInfo = await SingleDateBookingInfo.find( { customerId: loginUserId, meetingEventBookingDate: { $gte: currentIstDate } } );
-            // const eventMeetingMultipleContinousDatesUserBookingInfo = await ContinousMultipleDatesBookingInfo.find( { customerId: loginUserId, meetingEventEndBookingDate: { $gte: currentIstDate } } );
-            // const eventMeetingMultipleNonContinousDatesUserBookingInfo1 = await NonContinousMultipleDatesBookingInfo.find( { customerId: loginUserId, 'allDatesBookingInformation.meetingEventBookingDate': { $gte: currentIstDate } } );
-
-            // console.log(eventMeetingMultipleNonContinousDatesUserBookingInfo1);
-            // console.log("******************")
 
             const eventMeetingSingleDateUserBookingInfo = await SingleDateBookingInfo.aggregate([
                 {
@@ -57,11 +51,6 @@ async function GET(NextRequest, context){
                 {
                     $project: {
                         bookingInfo: "$$ROOT",
-                        'transactionDetails._id': 1,
-                        'transactionDetails.transactionAmount': 1,
-                        'transactionDetails.transactionType': 1,
-                        'transactionDetails.transactionDescription': 1,
-                        'transactionDetails.transactionDateTime': 1,
                     }
                 }
             ]);
@@ -90,11 +79,6 @@ async function GET(NextRequest, context){
                 {
                     $project: {
                         bookingInfo: "$$ROOT",
-                        'transactionDetails._id': 1,
-                        'transactionDetails.transactionAmount': 1,
-                        'transactionDetails.transactionType': 1,
-                        'transactionDetails.transactionDescription': 1,
-                        'transactionDetails.transactionDateTime': 1,
                     }
                 }
             ]);
@@ -117,17 +101,12 @@ async function GET(NextRequest, context){
                 {
                     $unwind: {
                         path: '$transactionDetails',
-                        preserveNullAndEmptyArrays: true // Optional, if you want to keep bookings without transactions
+                        preserveNullAndEmptyArrays: true 
                     }
                 },
                 {
                     $project: {
                         bookingInfo: "$$ROOT",
-                        'transactionDetails._id': 1,
-                        'transactionDetails.transactionAmount': 1,
-                        'transactionDetails.transactionType': 1,
-                        'transactionDetails.transactionDescription': 1,
-                        'transactionDetails.transactionDateTime': 1,
                     }
                 }
             ]);

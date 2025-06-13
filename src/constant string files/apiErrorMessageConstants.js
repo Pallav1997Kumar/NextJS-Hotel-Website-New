@@ -1,7 +1,8 @@
 export const INTERNAL_SERVER_ERROR = 'Internal Server Error';
 
 export const REGISTRATION_ERROR_MESSAGE = {
-    EMAIL_ADDRESS_ALREADY_EXIST: 'Email Address already exist!'
+    EMAIL_ADDRESS_ALREADY_EXIST: 'Email Address already exist!',
+    INVALID_DOMAIN_EMAIL_ADDRESS: 'This Email Address belongs for business purpose. Please select other domain Email Address!'
 }
 
 export const LOGIN_ERROR_MESSAGE = {

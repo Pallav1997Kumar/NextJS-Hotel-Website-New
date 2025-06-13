@@ -41,6 +41,7 @@ function AllCartsComponent(){
         const loginRedirectPage = '/cart';
         dispatch(updateLoginPageCalledFrom(loginPageCalledFrom));
         dispatch(updateLoginRedirectPage(loginRedirectPage));
+        router.push('/login');
     }
 
     async function addAccountCart() {

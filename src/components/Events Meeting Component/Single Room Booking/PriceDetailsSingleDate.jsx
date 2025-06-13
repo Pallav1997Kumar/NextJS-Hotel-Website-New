@@ -8,12 +8,12 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-import { convertDateTextToDate, getDateText } from "@/functions/date.js";
-import { useAppSelector } from "@/redux store/hooks.js";
+import { convertDateTextToDate, getDateText } from "@/functions/date";
+import { useAppSelector } from "@/redux store/hooks";
 import EquipmentsPriceBreakup from '@/components/Events Meeting Component/Common Components/EquipmentsPriceBreakup.jsx';
 import MealsPriceBreakup from '@/components/Events Meeting Component/Common Components/MealsPriceBreakup.jsx';
 import { eventMeetingTimingConstants } from "@/constant string files/eventsMeetingRoomImportantConstants.js";
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
+import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants";
 
 
 function PriceDetailsSingleDate(props) {

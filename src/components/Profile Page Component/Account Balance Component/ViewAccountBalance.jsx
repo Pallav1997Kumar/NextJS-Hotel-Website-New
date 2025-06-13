@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useEffect } from "react";
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import Button from '@mui/material/Button';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -12,7 +13,8 @@ import Paper from '@mui/material/Paper';
 
 import styles from './ViewAccountBalance.module.css';
 
-import { useAppSelector } from "@/redux store/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux store/hooks";
+import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
 import { utcTimeToISTConvesion } from "@/functions/date.js";
 import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
 import { TRANSACTION_HISTORY_FOUND, NO_TRANSACTION_HISTORY_FOUND } from "@/constant string files/apiSuccessMessageConstants.js";
@@ -28,6 +30,24 @@ const tableHeadingStyle = {
 
 function ViewAccountBalance() {
     const loginUserDetails = useAppSelector((reduxStore)=> reduxStore.userSlice.loginUserDetails);
+
+    const dispatch = useAppDispatch();
+    const router = useRouter();
+
+    useEffect(function() {
+        if (loginUserDetails == null) {
+            const loginPageCalledFrom = 'View Account Balance Page';
+            const loginRedirectPage = '/profile-home-page';
+            dispatch(updateLoginPageCalledFrom(loginPageCalledFrom));
+            dispatch(updateLoginRedirectPage(loginRedirectPage));
+            router.push('/login');
+        }
+    }, [loginUserDetails, dispatch, router]);
+
+    if(loginUserDetails == null){
+        return null;
+    }
+
     const loginUserId = loginUserDetails.userId;
 
     const [loginCustomerInfo, setLoginCustomerInfo] = useState(null);

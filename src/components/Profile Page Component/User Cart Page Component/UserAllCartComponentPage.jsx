@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import styles from './UserAllCartComponentPage.module.css';
 
 import { useAppSelector, useAppDispatch } from "@/redux store/hooks";
+import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
 import UserRoomSuiteBookingCart from "@/components/User Carts Component/UserRoomSuiteBookingCart.jsx";
 import UserDiningBookingCart from "@/components/User Carts Component/UserDiningBookingCart.jsx";
 import UserEventMeetingBookingCart from "@/components/User Carts Component/UserEventMeetingBookingCart.jsx";
@@ -22,11 +23,26 @@ import { addDiningBookingInfo, resetDiningBookingInfo } from "@/redux store/feat
 
 function UserAllCartComponentPage(){
     
-    const loginUserDetails = useAppSelector((reduxStore)=> reduxStore.userSlice.loginUserDetails);
-    const loginUserId = loginUserDetails.userId;
-
     const dispatch = useAppDispatch();
     const router = useRouter();
+
+    const loginUserDetails = useAppSelector((reduxStore)=> reduxStore.userSlice.loginUserDetails);
+    
+    useEffect(function() {
+        if (loginUserDetails == null) {
+            const loginPageCalledFrom = 'My Cart Page';
+            const loginRedirectPage = '/profile-home-page';
+            dispatch(updateLoginPageCalledFrom(loginPageCalledFrom));
+            dispatch(updateLoginRedirectPage(loginRedirectPage));
+            router.push('/login');
+        }
+    }, [loginUserDetails, dispatch, router]);
+
+    if(loginUserDetails == null){
+        return null;
+    }
+    
+    const loginUserId = loginUserDetails.userId;
 
     const [loadingCartDetails, setLoadingCartDetails] = useState(true);
     const [proceedBtnClickable, setProceedBtnClickable] = useState(true);

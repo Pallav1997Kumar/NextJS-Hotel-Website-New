@@ -1,0 +1,67 @@
+.breadcrumbsContainer{
+    margin: 1% 1.5%;
+    background-color: lightgreen;
+    padding: 1%;
+}
+
+.breadcrumbsContainer p{
+    font-size: 1.25rem;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+    color: blueviolet;
+}
+
+.breadcrumbsContainer span{
+    padding-right: 0.75%;
+}
+
+.breadcrumbsLink:hover{
+    color: darkmagenta;
+    text-decoration: underline;
+}
+
+.diningRoomsEventContainer{
+    margin: 4%;
+}
+
+.endMessageStyle{
+    text-align: center;
+    font-size: 1.2rem;
+    color: red;
+    font-weight: bold;
+    background-color: rgb(209, 193, 224);
+    padding: 1%;
+    margin: 0% 1%;
+}
+
+.loaderMessage{
+    text-align: center;
+    font-size: 1.2rem;
+    color: brown;
+    padding: 1%;
+    margin: 0% 1%;
+    background-color: aquamarine;
+}
+
+.categoryBooking{
+    margin: 2% 3%;;
+}
+
+.categoryBooking h4{
+    margin-bottom: 1%;
+}
+
+.categoryBooking ol{
+    margin-left: 3%;
+}
+
+.categoryBooking li{
+    list-style:lower-roman;
+    padding: 0.5%;
+}
+
+.categoryBooking li:hover{
+    cursor: pointer;
+    color: goldenrod;
+}

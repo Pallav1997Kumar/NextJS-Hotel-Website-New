@@ -31,15 +31,15 @@ function UserAllBookingComponent(props){
 
         if(sortSelection === DATE_BOOKED_ASCENDING){
             allBookingInfo.sort(function(a,b){
-                const dateA = new Date(a.transactionDetails.transactionDateTime);
-                const dateB = new Date(b.transactionDetails.transactionDateTime);
+                const dateA = new Date(a.bookingInfo.transactionDetails.transactionDateTime);
+                const dateB = new Date(b.bookingInfo.transactionDetails.transactionDateTime);
                 return  dateA - dateB;
             });
         }
         else if(sortSelection === DATE_BOOKED_DESCENDING){
             allBookingInfo.sort(function(a,b){
-                const dateA = new Date(a.transactionDetails.transactionDateTime);
-                const dateB = new Date(b.transactionDetails.transactionDateTime);
+                const dateA = new Date(a.bookingInfo.transactionDetails.transactionDateTime);
+                const dateB = new Date(b.bookingInfo.transactionDetails.transactionDateTime);
                 return  dateB - dateA;
             });
         }
@@ -264,7 +264,7 @@ function UserAllBookingComponent(props){
 
             {allBookingInfo.map(function(eachBookingInfo){
                 const bookingInfo =  eachBookingInfo.bookingInfo; 
-                const transactionDetails = eachBookingInfo.transactionDetails;
+                const transactionDetails = bookingInfo.transactionDetails;
                 if(Object.hasOwn(bookingInfo, 'bookingRoomTitle')){
                     return <EachRoomBookingInfo eachRoomBookingInfo={bookingInfo} transactionDetails={transactionDetails} />
                 }

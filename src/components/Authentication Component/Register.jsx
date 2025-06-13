@@ -148,6 +148,8 @@ function Register(){
                 }
             });
             const data = await response.json();
+            console.log(data);
+            
             if(response.status === 404){
                 setRegistrationErrorMessage(data.errorMessage);
             }

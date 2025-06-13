@@ -29,15 +29,15 @@ function UserEventMeetingBookingComponent(props){
 
         if(sortSelection === DATE_BOOKED_ASCENDING){
             eventMeetingBookingInfo.sort(function(a,b){
-                const dateA = new Date(a.transactionDetails.transactionDateTime);
-                const dateB = new Date(b.transactionDetails.transactionDateTime);
+                const dateA = new Date(a.bookingInfo.transactionDetails.transactionDateTime);
+                const dateB = new Date(b.bookingInfo.transactionDetails.transactionDateTime);
                 return  dateA - dateB;
             });
         }
         else if(sortSelection === DATE_BOOKED_DESCENDING){
             eventMeetingBookingInfo.sort(function(a,b){
-                const dateA = new Date(a.transactionDetails.transactionDateTime);
-                const dateB = new Date(b.transactionDetails.transactionDateTime);
+                const dateA = new Date(a.bookingInfo.transactionDetails.transactionDateTime);
+                const dateB = new Date(b.bookingInfo.transactionDetails.transactionDateTime);
                 return  dateB - dateA;
             });
         }
@@ -217,7 +217,7 @@ function UserEventMeetingBookingComponent(props){
 
             {eventMeetingBookingInfo.map(function(eachEventMeetingRoomBookingInfo){
                 const eventMeetingBookingInfo =  eachEventMeetingRoomBookingInfo.bookingInfo; 
-                const transactionDetails = eachEventMeetingRoomBookingInfo.transactionDetails;
+                const transactionDetails = eventMeetingBookingInfo.transactionDetails;
                 return <EachEventMeetingBookingInfo eachEventMeetingBookingInfo={eventMeetingBookingInfo} transactionDetails={transactionDetails} />
             })}
         </div>

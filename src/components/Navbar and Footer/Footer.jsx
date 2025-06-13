@@ -25,7 +25,17 @@ function Footer() {
       dispatch(updateLoginPageCalledFrom(loginPageCalledFrom));
       dispatch(updateLoginRedirectPage(loginRedirectPage));
       router.push('/login');
-  }
+   }
+
+   function adminLoginClickHandler(event){
+      event.preventDefault();
+      const loginPageCalledFrom = 'Footer';
+      const loginRedirectPage = '/admin-home-page';
+      dispatch(updateLoginPageCalledFrom(loginPageCalledFrom));
+      dispatch(updateLoginRedirectPage(loginRedirectPage));
+      router.push('/admin-login');
+   }
+
 
    return(
     <div className={styles.footer}>
@@ -100,6 +110,9 @@ function Footer() {
                </li>
                <li>
                   <Link href="/contactUs">Contact Us</Link>
+               </li>
+               <li>
+                  <Link onClick={adminLoginClickHandler} href="/admin-login">Admin Login</Link>
                </li>
                <li>
                   <Link onClick={loginClickHandler} href="/login">Login</Link>

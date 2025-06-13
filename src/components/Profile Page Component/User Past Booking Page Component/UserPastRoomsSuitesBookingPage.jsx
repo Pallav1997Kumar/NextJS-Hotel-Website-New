@@ -2,17 +2,37 @@
 import React, { useState, useEffect } from "react";
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import styles from './UserPastDiningRoomEventPage.module.css';
 
 import { useAppSelector, useAppDispatch } from "@/redux store/hooks";
+import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
 import { ROOMS_SUITES_BOOKING_INFO_IS_PRESENT, ROOMS_SUITES_BOOKING_INFO_IS_EMPTY } from "@/constant string files/apiSuccessMessageConstants.js";
-import UserRoomsSuitesBookingComponent from "@/components/User Current Booking Component/UserRoomsSuitesBookingComponent.jsx";
+import UserRoomsSuitesBookingComponent from "@/components/User Booking Component/UserRoomsSuitesBookingComponent.jsx";
 
 
 function UserPastRoomsSuitesBookingPage(){
 
+    const dispatch = useAppDispatch();
+    const router = useRouter();
+
     const loginUserDetails = useAppSelector((reduxStore)=> reduxStore.userSlice.loginUserDetails);
+
+    useEffect(function() {
+        if (loginUserDetails == null) {
+            const loginPageCalledFrom = 'My Cart Page';
+            const loginRedirectPage = '/profile-home-page';
+            dispatch(updateLoginPageCalledFrom(loginPageCalledFrom));
+            dispatch(updateLoginRedirectPage(loginRedirectPage));
+            router.push('/login');
+        }
+    }, [loginUserDetails, dispatch, router]);
+
+    if(loginUserDetails == null){
+        return null;
+    }
+    
     const loginUserId = loginUserDetails.userId;
 
     const [loadingBookingDetails, setLoadingBookingDetails] = useState(true);

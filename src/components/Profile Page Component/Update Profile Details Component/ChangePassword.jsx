@@ -3,16 +3,36 @@ import React, { useState, useEffect } from "react";
 import { usePathname } from 'next/navigation';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import styles from './ChangePassword.module.css';
 
 import InputAreaForEditInfo from "@/components/Input Area/InputAreaForEditInfo.jsx";
-import { useAppSelector } from "@/redux store/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux store/hooks";
+import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
 
 
 function ChangePassword(){
 
     const loginUserDetails = useAppSelector((reduxStore)=> reduxStore.userSlice.loginUserDetails);
+
+    const dispatch = useAppDispatch();
+    const router = useRouter();
+
+    useEffect(function() {
+        if (loginUserDetails == null) {
+            const loginPageCalledFrom = 'Add Balance to Account Page';
+            const loginRedirectPage = '/profile-home-page';
+            dispatch(updateLoginPageCalledFrom(loginPageCalledFrom));
+            dispatch(updateLoginRedirectPage(loginRedirectPage));
+            router.push('/login');
+        }
+    }, [loginUserDetails, dispatch, router]);
+
+    if(loginUserDetails == null){
+        return null;
+    }
+
     const loginUserId = loginUserDetails.userId;
 
     const pathname = usePathname();

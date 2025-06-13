@@ -384,7 +384,7 @@ export default function BookingRoomContainer(props) {
                                 <Typography id="modal-modal-title" variant="h6" component="h2">
                                     Please find the details of guests for each room
                                 </Typography>                           
-                                <Typography id="modal-modal-description">
+                                <Typography id="modal-modal-description" component="div">
                                     <div className={styles.guestDetails}>
                                         {roomsArray.map(function(element){
                                             const roomGuestDetails = guestRoomsDetails.find(function(eachRoom){

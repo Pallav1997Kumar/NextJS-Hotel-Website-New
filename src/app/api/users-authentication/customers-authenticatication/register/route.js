@@ -14,6 +14,13 @@ async function POST(NextRequest){
         console.log(body);
         const { firstName, middleName, lastName, fullName, gender, dob, email, contactNo, alternateContactNo, password } = body;
 
+        if(email.toString().endsWith("@royalpalace.co.in")){
+            return NextResponse.json(
+                { errorMessage: REGISTRATION_ERROR_MESSAGE.INVALID_DOMAIN_EMAIL_ADDRESS },
+                { status: 404 }
+            );
+        }
+
         const hotelUser = await HotelCustomersUsers.findOne( { emailAddress: email } );
         if(hotelUser){
             return NextResponse.json(
@@ -44,7 +51,10 @@ async function POST(NextRequest){
         }
     }
     catch(error){
-        return NextResponse.json({ error: INTERNAL_SERVER_ERROR }, { status: 500 })
+        return NextResponse.json(
+            { error: INTERNAL_SERVER_ERROR }, 
+            { status: 500 }
+        );
     }
 }
 

@@ -17,9 +17,11 @@ function Navbar(){
     
     let loginUserId;
     let loginUserFullName;
+    let loginEmailAddress;
 
     if(loginUserDetails != null){
         loginUserId = loginUserDetails.userId;
+        loginEmailAddress = loginUserDetails.emailAddress;
         loginUserFullName = loginUserDetails.fullName;
     } 
 
@@ -29,6 +31,14 @@ function Navbar(){
         dispatch(updateLoginPageCalledFrom(loginPageCalledFrom));
         dispatch(updateLoginRedirectPage(loginRedirectPage));
     }
+
+    let isAdmin = false;
+
+    if(loginUserDetails != null && loginEmailAddress && loginEmailAddress.endsWith("@royalpalace.co.in")){
+        isAdmin = true;
+    }
+
+    const usernameClickDestination = isAdmin ? '/admin-home-page' : '/profile-home-page';
 
     
     return(
@@ -74,7 +84,7 @@ function Navbar(){
             <div className={styles.userProfileRouting}>
                 <ul>
                     <li>
-                        <Link href="/profile-home-page">
+                        <Link href={usernameClickDestination}>
                             {loginUserFullName}
                         </Link>
                     </li>

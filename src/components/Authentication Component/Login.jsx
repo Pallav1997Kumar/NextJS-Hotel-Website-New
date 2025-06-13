@@ -11,6 +11,7 @@ import styles from "./Login.module.css";
 import InputAreaForRegisterLogin from "@/components/Input Area/InputAreaForRegisterLogin.jsx";
 import { useAppDispatch , useAppSelector} from "@/redux store/hooks.js";
 import { login } from "@/redux store/features/Auth Features/loginUserDetailsSlice.js";
+import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
 
 
 function Login(){
@@ -106,6 +107,17 @@ function Login(){
 
     }
 
+
+    function adminLoginClickHandler(event){
+          event.preventDefault();
+          const loginPageCalledFrom = 'User Login Page';
+          const loginRedirectPage = '/admin-home-page';
+          dispatch(updateLoginPageCalledFrom(loginPageCalledFrom));
+          dispatch(updateLoginRedirectPage(loginRedirectPage));
+          router.push('/admin-login');
+    }
+
+
     return(
         <div className={styles.loginContainer}>
             <div className={styles.loginFormPart}>
@@ -153,6 +165,13 @@ function Login(){
                     <p>Don't have an account</p>
                     <p className={styles.registerLink}>
                         <Link href='/register'>Click here to Register</Link>
+                    </p>
+                </div>
+
+                <div className={styles.adminLoginNavigation}>
+                    <p>Are you an Admin</p>
+                    <p className={styles.adminLink}>
+                        <Link onClick={adminLoginClickHandler} href="/admin-login">Click here to Login as Admin</Link>
                     </p>
                 </div>
             </div>

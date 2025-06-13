@@ -12,6 +12,9 @@ import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux stor
 
 function ProfileHomePage(){
 
+    const dispatch = useAppDispatch();
+    const router = useRouter();
+    
     const loginUserDetails = useAppSelector((reduxStore)=> reduxStore.userSlice.loginUserDetails);
 
     let loginUserId;
@@ -20,10 +23,15 @@ function ProfileHomePage(){
     if(loginUserDetails != null){
         loginUserId = loginUserDetails.userId;
         loginUserFullName = loginUserDetails.fullName;
-    }  
-    
-    const dispatch = useAppDispatch();
-    const router = useRouter();
+    } 
+
+    if(loginUserDetails == null){
+        const loginPageCalledFrom = 'Profile Page';
+        const loginRedirectPage = '/profile-home-page';
+        dispatch(updateLoginPageCalledFrom(loginPageCalledFrom));
+        dispatch(updateLoginRedirectPage(loginRedirectPage));
+        router.push('/login');
+    } 
 
 
     async function logoutHandler() {
@@ -52,9 +60,15 @@ function ProfileHomePage(){
 
     return (
         <div className={styles.profileHomePage}>
+            {(loginUserDetails != null) && 
             <h1>Welcome</h1>
-            <h3>{loginUserFullName}</h3>
+            }
             
+            {(loginUserDetails != null) && 
+            <h3>{loginUserFullName}</h3> 
+            }
+            
+            {(loginUserDetails != null) &&
             <div className={styles.proileOptions}>
                 <ul>
                     <li>
@@ -101,6 +115,7 @@ function ProfileHomePage(){
                     <li onClick ={logoutHandler}>Logout</li>
                 </ul>
             </div>
+            }
         </div>
     )
 }

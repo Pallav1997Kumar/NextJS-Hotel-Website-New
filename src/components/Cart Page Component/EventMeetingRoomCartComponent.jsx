@@ -12,6 +12,7 @@ import EventMeetingRoomBookingCartComponent from "@/components/Carts Component/E
 import { updateLoginPageCalledFrom, updateLoginRedirectPage } from '@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice';
 import { roomBookingDateTypeConstants } from "@/constant string files/eventsMeetingRoomImportantConstants.js";
 import { INFORMATION_ADD_TO_CART_SUCCESSFUL } from "@/constant string files/apiSuccessMessageConstants.js";
+import { deleteParticularBookingFromEventMeetingCart } from '@/redux store/features/Booking Features/eventMeetingRoomBookingCartSlice';
 
 
 function EventMeetingRoomCartComponent(){

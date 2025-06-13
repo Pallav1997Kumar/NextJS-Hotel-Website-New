@@ -29,7 +29,7 @@ async function POST(NextRequest){
                     emailAddress: hotelUserPasswordMatch.emailAddress,
                     fullName: hotelUserPasswordMatch.fullName
                 }
-                const token = jwt.sign(tokenData,jwtSecretKey, { expiresIn: '1d' });
+                const token = jwt.sign(tokenData, jwtSecretKey, { expiresIn: '1d' });
                 const response =  NextResponse.json(
                     { message: SUCCESSFUL_LOGIN, loginUserDetails: loginUserDetails },
                     { status: 200 }

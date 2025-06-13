@@ -71,3 +71,7 @@ export const EVENT_MEETING_ROOM_BOOKING_INFO_IS_PRESENT = 'Event and Meeting Roo
 export const ROOMS_SUITES_BOOKING_INFO_IS_EMPTY = 'Rooms Suites Booking Info is Empty!';
 
 export const ROOMS_SUITES_BOOKING_INFO_IS_PRESENT = 'Rooms Suites Booking Info is Present!';
+
+export const DINING_ROOMS_SUITES_EVENT_MEETING_BOOKING_INFO_IS_EMPTY = 'Dining, Rooms Suites and Event Meeting Rooms Booking Info is Empty!';
+
+export const DINING_ROOMS_SUITES_EVENT_MEETING_BOOKING_INFO_IS_PRESENT = 'Dining, Rooms Suites and Event Meeting Rooms Booking Info is Present!';

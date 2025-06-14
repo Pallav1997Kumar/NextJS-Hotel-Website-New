@@ -7,10 +7,23 @@ import styles from "./AdminHomePage.module.css";
 
 import { logout } from "@/redux store/features/Auth Features/loginUserDetailsSlice.js";
 import { useAppSelector, useAppDispatch } from "@/redux store/hooks.js";
-import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
+import { 
+    updateLoginPageCalledFrom, 
+    updateLoginRedirectPage 
+} from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice.js";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
 
 function AdminHomePage(){
+    return (
+        <ErrorBoundary>
+            <AdminHomePageFunctionalComponent />
+        </ErrorBoundary>
+    );
+}
+
+
+function AdminHomePageFunctionalComponent(){
 
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -86,6 +99,12 @@ function AdminHomePage(){
                     <li>
                     <Link href={"/admin-home-page/view-past-bookings"}>
                             View Past Bookings
+                        </Link>
+                    </li>
+
+                    <li>
+                    <Link href={"/admin-home-page/view-transaction-history?page=1"}>
+                            View Transaction History
                         </Link>
                     </li>
                     

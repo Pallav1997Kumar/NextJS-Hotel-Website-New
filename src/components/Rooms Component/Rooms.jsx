@@ -6,9 +6,10 @@ import Button from '@mui/material/Button';
 import styles from "./Rooms.module.css";
 
 import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
 
-export default async function Rooms(props){
+async function RoomsFunctionalComponent(props){
 
     const { title, intro, path , description, totalRoomSize, coverPhoto } = props;
 
@@ -69,3 +70,24 @@ async function fetchRoomsSuitesEachDayData(title){
         console.log(error);
     }
 }
+
+
+function Rooms(props){
+
+    const { title, intro, path , description, totalRoomSize, coverPhoto } = props;
+
+    return(
+        <ErrorBoundary>
+            <RoomsFunctionalComponent 
+                title={title}
+                intro={intro}
+                path={path}
+                description={description}
+                totalRoomSize={totalRoomSize}
+                coverPhoto={coverPhoto}
+            />
+        </ErrorBoundary>
+    );
+}
+
+export default Rooms;

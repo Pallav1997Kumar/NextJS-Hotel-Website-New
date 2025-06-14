@@ -46,12 +46,6 @@ function EventMeetingMultipleDateNonContinuousBookingInfo(props){
             <p className={styles.eachEventMeetingTitle}>
                 Meeting / Event Area Name: {eachEventMeetingBookingInfo.meetingEventsInfoTitle}
             </p>
-            {transactionDetails &&
-                <p className={styles.eventMeetingBookingEachInfo}>
-                    <span className={styles.eventMeetingBookingInfoEachInfoTitle}>Meeting / Event Booked On Date: </span>
-                    {getDateTextFromFullDate(transactionDetails.transactionDateTime)}
-                </p>
-            }
             {(Object.hasOwn(eachEventMeetingBookingInfo, 'allDatesBookingInformation')) &&
                 <div className={styles.allDateNumber}>
                     {(eachEventMeetingBookingInfo.allDatesBookingInformation).map(function(eachBookingDate){

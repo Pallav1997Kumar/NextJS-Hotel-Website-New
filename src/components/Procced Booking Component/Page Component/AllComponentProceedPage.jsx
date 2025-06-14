@@ -17,9 +17,10 @@ import { resetDiningBookingInfo } from "@/redux store/features/Booking Informati
 import { resetEventMeetingBookingInfo } from "@/redux store/features/Booking Information/eventMeetingBookingInfoSlice.js";
 import { resetRoomSuiteBookingInfo } from "@/redux store/features/Booking Information/roomSuiteBookingInfoSlice.js";
 import { ROOMS_SUITES_DINING_EVENT_MEETING_ROOM_BOOKING_PROCESS_SUCCESSFUL } from "@/constant string files/apiSuccessMessageConstants.js";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary";
 
 
-function AllComponentProceedPage(){
+function AllComponentProceedPageFunctionalComponent(){
     const dispatch = useAppDispatch();
     const router = useRouter();
     
@@ -172,5 +173,15 @@ function AllComponentProceedPage(){
         </div>
     );
 }
+
+
+function AllComponentProceedPage(){
+    return(
+        <ErrorBoundary>
+            <AllComponentProceedPageFunctionalComponent />
+        </ErrorBoundary>
+    );
+}
+
 
 export default AllComponentProceedPage;

@@ -11,9 +11,23 @@ import styles from "./Register.module.css";
 
 import InputAreaForRegisterLogin from "@/components/Input Area/InputAreaForRegisterLogin.jsx";
 import { useAppDispatch } from "@/redux store/hooks.js";
-import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
+import { 
+    updateLoginPageCalledFrom, 
+    updateLoginRedirectPage 
+} from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice.js";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
+
 
 function Register(){
+    return (
+        <ErrorBoundary>
+            <RegisterFunctionalComponent />
+        </ErrorBoundary>
+    );
+}
+
+
+function RegisterFunctionalComponent(){
 
     const dispatch = useAppDispatch();
     const router = useRouter();

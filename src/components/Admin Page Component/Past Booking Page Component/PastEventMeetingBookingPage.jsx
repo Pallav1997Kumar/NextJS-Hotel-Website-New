@@ -7,13 +7,29 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 import styles from './PastDiningRoomEventPage.module.css';
 
-import { EVENT_MEETING_ROOM_BOOKING_INFO_IS_PRESENT, EVENT_MEETING_ROOM_BOOKING_INFO_IS_EMPTY } from "@/constant string files/apiSuccessMessageConstants.js";
+import { 
+    EVENT_MEETING_ROOM_BOOKING_INFO_IS_PRESENT, 
+    EVENT_MEETING_ROOM_BOOKING_INFO_IS_EMPTY 
+} from "@/constant string files/apiSuccessMessageConstants.js";
 import EachAdminEventMeetingBookingInfo from "@/components/Admin Booking Information Component/Event Meeting Booking/EachAdminEventMeetingBookingInfo.jsx";
 import { useAppSelector, useAppDispatch } from "@/redux store/hooks.js";
-import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
+import { 
+    updateLoginPageCalledFrom, 
+    updateLoginRedirectPage 
+} from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice.js";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
 
 function PastEventMeetingBookingPage(){
+    return(
+        <ErrorBoundary>
+            <PastEventMeetingBookingPageFunctionalComponent />
+        </ErrorBoundary>
+    );
+}
+
+
+function PastEventMeetingBookingPageFunctionalComponent(){
 
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -39,7 +55,8 @@ function PastEventMeetingBookingPage(){
         return ;
     }
     
-    if(loginUserDetails != null && !loginEmailAddress.endsWith("@royalpalace.co.in")){
+    if(loginUserDetails != null && 
+        !loginEmailAddress.endsWith("@royalpalace.co.in")){
         const loginPageCalledFrom = 'Admin Current Event Meeting Rooms Page';
         const loginRedirectPage = '/admin-home-page';
         dispatch(updateLoginPageCalledFrom(loginPageCalledFrom));
@@ -58,7 +75,8 @@ function PastEventMeetingBookingPage(){
 
 
     useEffect(function(){
-        if(loginUserDetails != null && loginUserDetails.emailAddress.endsWith("@royalpalace.co.in")){
+        if(loginUserDetails != null && 
+            loginUserDetails.emailAddress.endsWith("@royalpalace.co.in")){
             fetchEventMeetingBookingDb();
         }
     }, []);
@@ -123,7 +141,7 @@ function PastEventMeetingBookingPage(){
                     </Link>
                     <span>{'>>'}</span> 
                     <Link href="/admin-home-page/view-past-bookings"> 
-                        <span className={styles.breadcrumbsLink}> VIEW CURRENT OR UPCOMING BOOKINGS </span>
+                        <span className={styles.breadcrumbsLink}> VIEW PAST BOOKINGS </span>
                     </Link>
                     <span>{'>>'}</span>
                     <Link href="/admin-home-page/view-past-bookings/events-meeting-room"> 
@@ -132,25 +150,28 @@ function PastEventMeetingBookingPage(){
                 </p>
             </div>
 
-            {((eventMeetingBooking != null && eventMeetingBooking.length > 0 && displayedEventMeetingBookings.length > 0) && (loginUserDetails != null && loginUserDetails.emailAddress.endsWith("@royalpalace.co.in"))) &&
-            <div className={styles.diningRoomsEventContainer}>
-                <InfiniteScroll
-                    dataLength={displayedEventMeetingBookings.length}
-                    next={fetchNext}
-                    hasMore={hasMore}
-                    loader={<h4 className={styles.loaderMessage}>Loading more bookings...</h4>}
-                    endMessage={<p className={styles.endMessageStyle}>No more Event and Meeting Rooms Bookings</p>}
-                >
-                    {displayedEventMeetingBookings.map(function(eachEventMeetingRoomBookingInfo){
-                        const eventMeetingBookingInfo =  eachEventMeetingRoomBookingInfo.bookingInfo; 
-                        return (
-                            <EachAdminEventMeetingBookingInfo 
-                                eachEventMeetingBookingInfo={eventMeetingBookingInfo} 
-                            />
-                        );
-                    })}
-                </InfiniteScroll>               
-            </div>
+            {((eventMeetingBooking != null && eventMeetingBooking.length > 0 && 
+                displayedEventMeetingBookings.length > 0) && 
+                (loginUserDetails != null && 
+                    loginUserDetails.emailAddress.endsWith("@royalpalace.co.in"))) &&
+                <div className={styles.diningRoomsEventContainer}>
+                    <InfiniteScroll
+                        dataLength={displayedEventMeetingBookings.length}
+                        next={fetchNext}
+                        hasMore={hasMore}
+                        loader={<h4 className={styles.loaderMessage}>Loading more bookings...</h4>}
+                        endMessage={<p className={styles.endMessageStyle}>No more Event and Meeting Rooms Bookings</p>}
+                    >
+                        {displayedEventMeetingBookings.map(function(eachEventMeetingRoomBookingInfo){
+                            const eventMeetingBookingInfo =  eachEventMeetingRoomBookingInfo.bookingInfo; 
+                            return (
+                                <EachAdminEventMeetingBookingInfo 
+                                    eachEventMeetingBookingInfo={eventMeetingBookingInfo} 
+                                />
+                            );
+                        })}
+                    </InfiniteScroll>               
+                </div>
             }
                         
 

@@ -7,12 +7,19 @@ import { useRouter } from 'next/navigation';
 import styles from './UserCurrentDiningRoomEventPage.module.css';
 
 import { useAppSelector, useAppDispatch } from "@/redux store/hooks";
-import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
-import { EVENT_MEETING_ROOM_BOOKING_INFO_IS_PRESENT, EVENT_MEETING_ROOM_BOOKING_INFO_IS_EMPTY } from "@/constant string files/apiSuccessMessageConstants.js";
+import { 
+    updateLoginPageCalledFrom, 
+    updateLoginRedirectPage 
+} from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice.js";
+import { 
+    EVENT_MEETING_ROOM_BOOKING_INFO_IS_PRESENT, 
+    EVENT_MEETING_ROOM_BOOKING_INFO_IS_EMPTY 
+} from "@/constant string files/apiSuccessMessageConstants.js";
 import UserEventMeetingBookingComponent from "@/components/User Booking Component/UserEventMeetingBookingComponent.jsx";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
 
-function UserCurrentEventMeetingBookingPage(){
+function UserCurrentEventMeetingBookingPageFunctionalComponent(){
 
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -111,6 +118,15 @@ function UserCurrentEventMeetingBookingPage(){
         </div>
     );
 
+}
+
+
+function UserCurrentEventMeetingBookingPage(){
+    return(
+        <ErrorBoundary>
+            <UserCurrentEventMeetingBookingPageFunctionalComponent />
+        </ErrorBoundary>
+    );
 }
 
 

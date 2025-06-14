@@ -7,13 +7,29 @@ import { useRouter } from 'next/navigation';
 
 import styles from './CurrentDiningRoomEventPage.module.css';
 
-import { ROOMS_SUITES_BOOKING_INFO_IS_PRESENT, ROOMS_SUITES_BOOKING_INFO_IS_EMPTY } from "@/constant string files/apiSuccessMessageConstants.js";
+import { 
+    ROOMS_SUITES_BOOKING_INFO_IS_PRESENT, 
+    ROOMS_SUITES_BOOKING_INFO_IS_EMPTY 
+} from "@/constant string files/apiSuccessMessageConstants.js";
 import EachAdminRoomBookingInfo from "@/components/Admin Booking Information Component/Rooms Suites Booking/EachAdminRoomBookingInfo.jsx";
 import { useAppSelector, useAppDispatch } from "@/redux store/hooks.js";
-import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
+import { 
+    updateLoginPageCalledFrom, 
+    updateLoginRedirectPage 
+} from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice.js";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
 
 function CurrentRoomsSuitesBookingPage(){
+    return (
+        <ErrorBoundary>
+            <CurrentRoomsSuitesBookingPageFunctionalComponent />
+        </ErrorBoundary>
+    );
+}
+
+
+function CurrentRoomsSuitesBookingPageFunctionalComponent(){
 
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -40,7 +56,8 @@ function CurrentRoomsSuitesBookingPage(){
             return ;
         }
 
-        if(loginUserDetails != null && !loginUserDetails.emailAddress.endsWith("@royalpalace.co.in")){
+        if(loginUserDetails != null && 
+            !loginUserDetails.emailAddress.endsWith("@royalpalace.co.in")){
             const loginPageCalledFrom = 'Admin Current Rooms Suites Page';
             const loginRedirectPage = '/admin-home-page';
             dispatch(updateLoginPageCalledFrom(loginPageCalledFrom));
@@ -59,7 +76,8 @@ function CurrentRoomsSuitesBookingPage(){
     const [totalPages, setTotalPages] = useState(1);
 
     useEffect(function(){
-        if(loginUserDetails != null && loginUserDetails.emailAddress.endsWith("@royalpalace.co.in")){
+        if(loginUserDetails != null && 
+            loginUserDetails.emailAddress.endsWith("@royalpalace.co.in")){
             fetchRoomSuiteBookingDb(currentPage);
         }
     }, []);
@@ -129,46 +147,50 @@ function CurrentRoomsSuitesBookingPage(){
                 </p>
             </div>
 
-            {(loadingBookingDetails && (loginUserDetails != null && loginUserDetails.emailAddress.endsWith("@royalpalace.co.in"))) &&
+            {(loadingBookingDetails && 
+                (loginUserDetails != null && 
+                    loginUserDetails.emailAddress.endsWith("@royalpalace.co.in"))) &&
                 <div className={styles.loadingBookingDetails}>
                     <p> LOADING ROOMS AND SUITES BOOKING DETAILS...</p>
                 </div>
             }
 
-            {(loginUserDetails != null && loginUserDetails.emailAddress.endsWith("@royalpalace.co.in")) &&
-            <div className={styles.diningRoomsEventContainer}>
-                {(!loadingBookingDetails && roomSuitesBooking !== null && roomSuitesBooking.length == 0) &&
-                    <div className={styles.emptyBooking}>
-                        <p>There are no Current or Future Upcoming Rooms and Suites Bookings</p>
-                    </div>
-                }
-
-                {(!loadingBookingDetails && roomSuitesBooking !== null && roomSuitesBooking.length > 0) &&
-                    <div>
-                        {roomSuitesBooking.map(function(eachRoomSuitesBookingInfo){
-                            const roomSuitesBookingInfo =  eachRoomSuitesBookingInfo.bookingInfo; 
-                            return (
-                                <EachAdminRoomBookingInfo 
-                                    eachRoomBookingInfo={roomSuitesBookingInfo} 
-                                />
-                            );
-                        })}
-
-                        {/* Pagination controls */}
-                        <div className={styles.paginationContainer}>
-                            <Button onClick={goToPrevPage} variant="contained" disabled={currentPage === 1}>
-                                Prev
-                            </Button>
-                            <span>
-                                Page {currentPage} of {totalPages}
-                            </span>
-                            <Button onClick={goToNextPage} variant="contained" disabled={currentPage === totalPages}>
-                                Next
-                            </Button>
+            {(loginUserDetails != null && 
+                loginUserDetails.emailAddress.endsWith("@royalpalace.co.in")) &&
+                <div className={styles.diningRoomsEventContainer}>
+                    {(!loadingBookingDetails && roomSuitesBooking !== null && roomSuitesBooking.length == 0) &&
+                        <div className={styles.emptyBooking}>
+                            <p>There are no Current or Future Upcoming Rooms and Suites Bookings</p>
                         </div>
-                    </div>
-                }
-            </div>
+                    }
+
+                    {(!loadingBookingDetails && 
+                        roomSuitesBooking !== null && roomSuitesBooking.length > 0) &&
+                        <div>
+                            {roomSuitesBooking.map(function(eachRoomSuitesBookingInfo){
+                                const roomSuitesBookingInfo =  eachRoomSuitesBookingInfo.bookingInfo; 
+                                return (
+                                    <EachAdminRoomBookingInfo 
+                                        eachRoomBookingInfo={roomSuitesBookingInfo} 
+                                    />
+                                );
+                            })}
+
+                            {/* Pagination controls */}
+                            <div className={styles.paginationContainer}>
+                                <Button onClick={goToPrevPage} variant="contained" disabled={currentPage === 1}>
+                                    Prev
+                                </Button>
+                                <span>
+                                    Page {currentPage} of {totalPages}
+                                </span>
+                                <Button onClick={goToNextPage} variant="contained" disabled={currentPage === totalPages}>
+                                    Next
+                                </Button>
+                            </div>
+                        </div>
+                    }
+                </div>
             }
 
         </div>

@@ -12,9 +12,10 @@ import { useAppDispatch, useAppSelector } from "@/redux store/hooks.js";
 import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
 import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
 import { incorrectCardDetailsErrorConstant } from "@/constant string files/incorrectCardDetailsErrorConstant.js"
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
 
-function AddMoneyInAccount(){
+function AddMoneyInAccountFunctionalComponent(){
 
     const loginUserDetails = useAppSelector((reduxStore)=> reduxStore.userSlice.loginUserDetails);
 
@@ -40,6 +41,7 @@ function AddMoneyInAccount(){
     const [showAmountContainer, setShowAmountContainer] = useState(true);
     const [amount, setAmount] = useState('');
     const [proceedToPayment, setProceedToPayment] = useState(false);
+    const [isPaymentProcessing, setIsPaymentProcessing] = useState(false);
 
     const [cardDetails, setCardDetails] = useState({
         cardName: "",
@@ -136,6 +138,7 @@ function AddMoneyInAccount(){
         if(cardName !== "" && cardNumber !== "" && cvvNumber !== "" && expiryMonth !== "" && expiryYear !== ""){
             if(cardNumber.length === 19 && cvvNumber.length === 3 && expiryMonth <= 12 && expiryYear.toString().length === 4){
                 try {
+                    setIsPaymentProcessing(true);
                     const amountInfo = {
                         amountToBeAdded: amount
                     }
@@ -173,8 +176,12 @@ function AddMoneyInAccount(){
                     else{
                         setPaymentErrorMessage(transactionData.errorMessage);
                     }
-                } catch (error) {
+                } 
+                catch (error) {
                     console.log(error);
+                }
+                finally{
+                    setIsPaymentProcessing(false);
                 }
             }
             else{
@@ -367,7 +374,11 @@ function AddMoneyInAccount(){
                     </label>
 
                     <div className={styles.cardBtnContainer}>
+                        {isPaymentProcessing ? 
+                        <Button type="submit" color="success" variant="contained" disabled> Proceed </Button>
+                         : 
                         <Button type="submit" color="success" variant="contained"> Proceed </Button>
+                        }   
                     </div>
 
                     {paymentSuccessMessage != '' &&
@@ -387,5 +398,15 @@ function AddMoneyInAccount(){
         </div>
     );
 }
+
+
+function AddMoneyInAccount(){
+    return (
+        <ErrorBoundary>
+            <AddMoneyInAccountFunctionalComponent />
+        </ErrorBoundary>
+    );
+}
+
 
 export default AddMoneyInAccount

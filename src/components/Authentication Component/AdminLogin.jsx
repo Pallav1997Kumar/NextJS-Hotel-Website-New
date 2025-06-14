@@ -11,9 +11,19 @@ import styles from "./AdminLogin.module.css";
 import InputAreaForRegisterLogin from "@/components/Input Area/InputAreaForRegisterLogin.jsx";
 import { useAppDispatch , useAppSelector} from "@/redux store/hooks.js";
 import { login } from "@/redux store/features/Auth Features/loginUserDetailsSlice.js";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
 
 function AdminLogin(){
+    return (
+        <ErrorBoundary>
+            <AdminLoginFunctionalComponent />
+        </ErrorBoundary>
+    );
+}
+
+
+function AdminLoginFunctionalComponent(){
     const router = useRouter();
 
     const loginPageCalledFrom = useAppSelector((reduxStore)=> reduxStore.loginPageCalledFromSliceName.loginPageCalledFrom);

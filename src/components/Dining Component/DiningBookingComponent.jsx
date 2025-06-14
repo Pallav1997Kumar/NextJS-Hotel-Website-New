@@ -19,6 +19,7 @@ import { updateLoginPageCalledFrom, updateLoginRedirectPage } from '@/redux stor
 import { diningSelectionErrorConstants } from "@/constant string files/diningSelectionErrorConstants.js";
 import { INFORMATION_ADD_TO_CART_SUCCESSFUL } from "@/constant string files/apiSuccessMessageConstants.js";
 import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
+import ErrorBoundary from '@/components/Error Boundary/ErrorBoundary.jsx';
 
 
 const initialDiningTableCount = {
@@ -51,7 +52,7 @@ function diningTableCounterReducer(state, action){
 }
 
 
-function DiningBookingComponent(props){
+function DiningBookingComponentFunctionalComponent(props){
 
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -437,24 +438,26 @@ function DiningBookingComponent(props){
                 }
 
                 {(!addedToCart && showAddCartBlock) &&
-                <div className={styles.buttonContainer}>
+                    <div className={styles.buttonContainer}>
 
-                    <div className={styles.editDetailsBtn}>
-                        <Button onClick={editDetailsBtnClickHandler} variant="contained">
-                            Want to Edit Details
-                        </Button>
+                        <div className={styles.editDetailsBtn}>
+                            <Button onClick={editDetailsBtnClickHandler} variant="contained">
+                                Want to Edit Details
+                            </Button>
+                        </div>
+
+                        {!isDataSavingToCart &&
+                        <Button onClick={addCartClickHandler} variant="contained">Add to Cart</Button>
+                        }
+
+                        {isDataSavingToCart &&
+                        <Button variant="contained" disabled>Please Wait...</Button>
+                        }
+                        <p className={styles.availableSlot}>The Selected Date and Time Slot is available.</p>
+                        <p className={styles.availableSlot}>Please Pay {CURRENCY_SYMBOL}{priceForBooking} for Table Booking.</p>
                     </div>
-
-                    {!isDataSavingToCart &&
-                    <Button onClick={addCartClickHandler} variant="contained">Add to Cart</Button>
-                    }
-
-                    {isDataSavingToCart &&
-                    <Button variant="contained" disabled>Please Wait...</Button>
-                    }
-                    <p className={styles.availableSlot}>The Selected Date and Time Slot is available.</p>
-                    <p className={styles.availableSlot}>Please Pay {CURRENCY_SYMBOL}{priceForBooking} for Table Booking.</p>
-                </div>}
+                }
+                
                 {addedToCart &&
                 <div className={styles.successfullyCartAdded}>
                     <p>Dining Table Successfully Added to Cart</p>
@@ -470,6 +473,17 @@ function DiningBookingComponent(props){
         </div>
     );
 
+}
+
+
+function DiningBookingComponent(props){
+    const diningRestaurantInfo = props.diningRestaurantInfo;
+
+    return (
+        <ErrorBoundary>
+            <DiningBookingComponentFunctionalComponent diningRestaurantInfo={diningRestaurantInfo} />
+        </ErrorBoundary>
+    );
 }
 
 export default DiningBookingComponent;

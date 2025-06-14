@@ -9,12 +9,25 @@ import Link from 'next/link';
 import styles from './DiningRoomEventMeetingStyle.module.css';
 
 import DiningBookingCartComponent from "@/components/Carts Component/DiningBookingCartComponent.jsx";
-import { updateLoginPageCalledFrom, updateLoginRedirectPage } from '@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice';
-import { deleteParticularBookingFromDiningCart } from '@/redux store/features/Booking Features/diningBookingCartSlice';
+import { 
+    updateLoginPageCalledFrom,
+    updateLoginRedirectPage 
+} from '@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice.js';
+import { deleteParticularBookingFromDiningCart } from '@/redux store/features/Booking Features/diningBookingCartSlice.js';
 import { INFORMATION_ADD_TO_CART_SUCCESSFUL } from "@/constant string files/apiSuccessMessageConstants.js";
+import ErrorBoundary from '@/components/Error Boundary/ErrorBoundary.jsx';
 
 
 function DiningCartComponent(){
+    return (
+        <ErrorBoundary>
+            <DiningCartComponentFunctionalComponent />
+        </ErrorBoundary>
+    );
+}
+
+
+function DiningCartComponentFunctionalComponent(){
 
     const dispatch = useAppDispatch();
     const router = useRouter();

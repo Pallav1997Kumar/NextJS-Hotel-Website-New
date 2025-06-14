@@ -1,9 +1,11 @@
 "use client"
 import styles from "./ContactUsContainer.module.css";
+
 import hotelBasicInfo from "@/json objects/hotelBasicInfo.js";
+import ErrorBoundary from '@/components/Error Boundary/ErrorBoundary.jsx';
 
 
-export default function ContactUsContainer(props) {
+function ContactUsContainerFunctionalComponent() {
     return (
         <div className={styles.contactUsContainer}>
             <h3>Contact Us</h3>
@@ -20,3 +22,14 @@ export default function ContactUsContainer(props) {
         </div>
     );
 }
+
+
+function ContactUsContainer(){
+    return (
+        <ErrorBoundary>
+            <ContactUsContainerFunctionalComponent />
+        </ErrorBoundary>
+    );
+}
+
+export default ContactUsContainer;

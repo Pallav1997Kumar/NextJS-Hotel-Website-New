@@ -9,10 +9,14 @@ import styles from './ChangePassword.module.css';
 
 import InputAreaForEditInfo from "@/components/Input Area/InputAreaForEditInfo.jsx";
 import { useAppDispatch, useAppSelector } from "@/redux store/hooks";
-import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
+import { 
+    updateLoginPageCalledFrom, 
+    updateLoginRedirectPage 
+} from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice.js";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
 
-function ChangePassword(){
+function ChangePasswordFunctionalComponent(){
 
     const loginUserDetails = useAppSelector((reduxStore)=> reduxStore.userSlice.loginUserDetails);
 
@@ -226,6 +230,15 @@ function ChangePassword(){
         </div>
     );
 
+}
+
+
+function ChangePassword(){
+    return(
+        <ErrorBoundary>
+            <ChangePasswordFunctionalComponent />
+        </ErrorBoundary>
+    );
 }
 
 

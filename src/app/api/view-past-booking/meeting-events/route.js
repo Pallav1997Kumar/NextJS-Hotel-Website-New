@@ -174,7 +174,7 @@ async function GET(NextRequest){
 
         // === 3. Sort by sortDate (ascending)
         combinedEventMeetingBookingsInfo.sort(function(a, b){
-            return new Date(a.sortDate) - new Date(b.sortDate);
+            return new Date(b.sortDate) - new Date(a.sortDate);
         });
 
         const totalEventMeetingBookingCount = combinedEventMeetingBookingsInfo.length;

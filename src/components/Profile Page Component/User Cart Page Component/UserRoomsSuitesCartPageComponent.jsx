@@ -8,13 +8,23 @@ import { useRouter } from 'next/navigation';
 import styles from './UserDiningRoomsSuitesEventMeetingStyle.module.css';
 
 import { useAppSelector, useAppDispatch } from "@/redux store/hooks";
-import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
+import { 
+    updateLoginPageCalledFrom, 
+    updateLoginRedirectPage 
+} from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice.js";
 import UserRoomSuiteBookingCart from "@/components/User Carts Component/UserRoomSuiteBookingCart.jsx";
-import { addRoomSuiteBookingInfo, resetRoomSuiteBookingInfo } from "@/redux store/features/Booking Information/roomSuiteBookingInfoSlice.js";
-import { ROOMS_SUITES_PRESENT_IN_CART, ROOMS_SUITES_CART_IS_EMPTY } from "@/constant string files/apiSuccessMessageConstants.js";
+import { 
+    addRoomSuiteBookingInfo, 
+    resetRoomSuiteBookingInfo 
+} from "@/redux store/features/Booking Information/roomSuiteBookingInfoSlice.js";
+import { 
+    ROOMS_SUITES_PRESENT_IN_CART, 
+    ROOMS_SUITES_CART_IS_EMPTY 
+} from "@/constant string files/apiSuccessMessageConstants.js";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
 
-function UserRoomsSuitesCartPageComponent(){
+function UserRoomsSuitesCartPageComponentFunctionalComponent(){
 
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -226,5 +236,15 @@ function UserRoomsSuitesCartPageComponent(){
     );
 
 }
+
+
+function UserRoomsSuitesCartPageComponent(){
+    return (
+        <ErrorBoundary>
+            <UserRoomsSuitesCartPageComponentFunctionalComponent />
+        </ErrorBoundary>
+    );
+}
+
 
 export default UserRoomsSuitesCartPageComponent;

@@ -7,12 +7,19 @@ import { useRouter } from 'next/navigation';
 import styles from './UserCurrentDiningRoomEventPage.module.css';
 
 import { useAppSelector, useAppDispatch } from "@/redux store/hooks";
-import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
-import { DINING_BOOKING_INFO_IS_PRESENT, DINING_BOOKING_INFO_IS_EMPTY } from "@/constant string files/apiSuccessMessageConstants.js";
+import { 
+    updateLoginPageCalledFrom, 
+    updateLoginRedirectPage 
+} from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice.js";
+import { 
+    DINING_BOOKING_INFO_IS_PRESENT, 
+    DINING_BOOKING_INFO_IS_EMPTY 
+} from "@/constant string files/apiSuccessMessageConstants.js";
 import UserDiningBookingComponent from "@/components/User Booking Component/UserDiningBookingComponent.jsx";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
 
-function UserCurrentDiningBookingPage(){
+function UserCurrentDiningBookingPageFunctionalComponent(){
 
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -113,6 +120,15 @@ function UserCurrentDiningBookingPage(){
         </div>
     );
 
+}
+
+
+function UserCurrentDiningBookingPage(){
+    return (
+        <ErrorBoundary>
+            <UserCurrentDiningBookingPageFunctionalComponent />
+        </ErrorBoundary>
+    );
 }
 
 

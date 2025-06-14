@@ -18,6 +18,7 @@ import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux stor
 import { utcTimeToISTConvesion } from "@/functions/date.js";
 import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
 import { TRANSACTION_HISTORY_FOUND, NO_TRANSACTION_HISTORY_FOUND } from "@/constant string files/apiSuccessMessageConstants.js";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
 
 const tableHeadingStyle = {
@@ -28,7 +29,7 @@ const tableHeadingStyle = {
 }
 
 
-function ViewAccountBalance() {
+function ViewAccountBalanceFunctionalComponent() {
     const loginUserDetails = useAppSelector((reduxStore)=> reduxStore.userSlice.loginUserDetails);
 
     const dispatch = useAppDispatch();
@@ -168,5 +169,15 @@ function ViewAccountBalance() {
         </div>
     );
 }
+
+
+function ViewAccountBalance(){
+    return (
+        <ErrorBoundary>
+            <ViewAccountBalanceFunctionalComponent />
+        </ErrorBoundary>
+    );
+}
+
 
 export default ViewAccountBalance;

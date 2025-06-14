@@ -6,9 +6,10 @@ import Button from '@mui/material/Button';
 import styles from "./DiningComponent.module.css";
 
 import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
+import ErrorBoundary from '@/components/Error Boundary/ErrorBoundary.jsx';
 
 
-export default async function DiningComponent(props) {
+async function DiningComponentFunctionalComponent(props) {
 
     const currentDining = props.currentDining;
     const diningTitle = currentDining.diningAreaTitle;
@@ -87,3 +88,15 @@ async function fetchDiningEachDayData(diningTitle){
         console.log(error);
     }
 }
+
+
+function DiningComponent(props){
+    const currentDining = props.currentDining;
+    return (
+        <ErrorBoundary>
+            <DiningComponentFunctionalComponent currentDining={currentDining} />
+        </ErrorBoundary>
+    );
+}
+
+export default DiningComponent;

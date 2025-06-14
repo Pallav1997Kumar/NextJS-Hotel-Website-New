@@ -7,13 +7,29 @@ import { useRouter } from 'next/navigation';
 
 import styles from './CurrentDiningRoomEventPage.module.css';
 
-import { DINING_BOOKING_INFO_IS_PRESENT, DINING_BOOKING_INFO_IS_EMPTY } from "@/constant string files/apiSuccessMessageConstants.js";
+import { 
+    DINING_BOOKING_INFO_IS_PRESENT, 
+    DINING_BOOKING_INFO_IS_EMPTY 
+} from "@/constant string files/apiSuccessMessageConstants.js";
 import { useAppSelector, useAppDispatch } from "@/redux store/hooks.js";
-import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
-import EachAdminDiningBookingInfo from "@/components/Admin Booking Information Component/Dining Booking/EachAdminDiningBookingInfo";
+import { 
+    updateLoginPageCalledFrom, 
+    updateLoginRedirectPage 
+} from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice.js";
+import EachAdminDiningBookingInfo from "@/components/Admin Booking Information Component/Dining Booking/EachAdminDiningBookingInfo.jsx";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
 
 function CurrentDiningBookingPage(){
+    return (
+        <ErrorBoundary>
+            <CurrentDiningBookingPageFunctionalComponent />
+        </ErrorBoundary>
+    );
+}
+
+
+function CurrentDiningBookingPageFunctionalComponent(){
 
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -40,7 +56,8 @@ function CurrentDiningBookingPage(){
             return ;
         }
 
-        if(loginUserDetails != null && !loginUserDetails.emailAddress.endsWith("@royalpalace.co.in")){
+        if(loginUserDetails != null && 
+            !loginUserDetails.emailAddress.endsWith("@royalpalace.co.in")){
             const loginPageCalledFrom = 'Admin Current Dining Page';
             const loginRedirectPage = '/admin-home-page';
             dispatch(updateLoginPageCalledFrom(loginPageCalledFrom));
@@ -59,7 +76,8 @@ function CurrentDiningBookingPage(){
     const [totalPages, setTotalPages] = useState(1);
 
     useEffect(function(){
-        if(loginUserDetails != null && loginUserDetails.emailAddress.endsWith("@royalpalace.co.in")){
+        if(loginUserDetails != null && 
+            loginUserDetails.emailAddress.endsWith("@royalpalace.co.in")){
             fetchDiningBookingDb(currentPage);
         }
     }, []);

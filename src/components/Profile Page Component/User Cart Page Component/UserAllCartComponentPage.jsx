@@ -8,20 +8,42 @@ import { useRouter } from 'next/navigation';
 import styles from './UserAllCartComponentPage.module.css';
 
 import { useAppSelector, useAppDispatch } from "@/redux store/hooks";
-import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
+import { 
+    updateLoginPageCalledFrom, 
+    updateLoginRedirectPage 
+} from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice.js";
 import UserRoomSuiteBookingCart from "@/components/User Carts Component/UserRoomSuiteBookingCart.jsx";
 import UserDiningBookingCart from "@/components/User Carts Component/UserDiningBookingCart.jsx";
 import UserEventMeetingBookingCart from "@/components/User Carts Component/UserEventMeetingBookingCart.jsx";
 import { roomBookingDateTypeConstants } from "@/constant string files/eventsMeetingRoomImportantConstants.js";
-import { ROOMS_SUITES_PRESENT_IN_CART, ROOMS_SUITES_CART_IS_EMPTY } from "@/constant string files/apiSuccessMessageConstants.js";
-import { EVENT_MEETING_ROOM_PRESENT_IN_CART, EVENT_MEETING_ROOM_CART_IS_EMPTY } from "@/constant string files/apiSuccessMessageConstants.js";
-import { DINING_PRESENT_IN_CART, DINING_CART_IS_EMPTY } from "@/constant string files/apiSuccessMessageConstants.js";
-import { addEventMeetingBookingInfo, resetEventMeetingBookingInfo } from "@/redux store/features/Booking Information/eventMeetingBookingInfoSlice.js";
-import { addRoomSuiteBookingInfo, resetRoomSuiteBookingInfo } from "@/redux store/features/Booking Information/roomSuiteBookingInfoSlice.js";
-import { addDiningBookingInfo, resetDiningBookingInfo } from "@/redux store/features/Booking Information/diningBookingInfoSlice.js";
+import { 
+    ROOMS_SUITES_PRESENT_IN_CART, 
+    ROOMS_SUITES_CART_IS_EMPTY 
+} from "@/constant string files/apiSuccessMessageConstants.js";
+import { 
+    EVENT_MEETING_ROOM_PRESENT_IN_CART, 
+    EVENT_MEETING_ROOM_CART_IS_EMPTY 
+} from "@/constant string files/apiSuccessMessageConstants.js";
+import { 
+    DINING_PRESENT_IN_CART, 
+    DINING_CART_IS_EMPTY 
+} from "@/constant string files/apiSuccessMessageConstants.js";
+import { 
+    addEventMeetingBookingInfo, 
+    resetEventMeetingBookingInfo 
+} from "@/redux store/features/Booking Information/eventMeetingBookingInfoSlice.js";
+import { 
+    addRoomSuiteBookingInfo, 
+    resetRoomSuiteBookingInfo 
+} from "@/redux store/features/Booking Information/roomSuiteBookingInfoSlice.js";
+import { 
+    addDiningBookingInfo, 
+    resetDiningBookingInfo 
+} from "@/redux store/features/Booking Information/diningBookingInfoSlice.js";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
 
-function UserAllCartComponentPage(){
+function UserAllCartComponentPageFunctionalComponent(){
     
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -498,6 +520,15 @@ function UserAllCartComponentPage(){
 
             </div>
         </React.Fragment>
+    );
+}
+
+
+function UserAllCartComponentPage(){
+    return(
+        <ErrorBoundary>
+            <UserAllCartComponentPageFunctionalComponent />
+        </ErrorBoundary>
     );
 }
 

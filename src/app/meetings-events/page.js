@@ -46,7 +46,12 @@ export default async function page(){
             </div>
             <div>
                 {meetingEventsRooms.map(function(eachEventsMeetings){
-                    return (<EventsMeetingsEachRoom key={eachEventsMeetings.meetingEventAreaTitle} currentMeetingEvent={eachEventsMeetings} />)
+                    return (
+                        <EventsMeetingsEachRoom 
+                            key={eachEventsMeetings.meetingEventAreaTitle} 
+                            currentMeetingEvent={eachEventsMeetings} 
+                        />
+                    );
                 })}
             </div>
         </React.Fragment>

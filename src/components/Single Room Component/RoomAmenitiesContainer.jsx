@@ -1,7 +1,10 @@
 "use client"
 import styles from "./RoomAmenitiesContainer.module.css";
 
-export default function RoomAmenitiesContainer(props){
+import ErrorBoundary from '@/components/Error Boundary/ErrorBoundary.jsx';
+
+
+function RoomAmenitiesContainerFunctionalComponent(props){
     const roomInfo = props.roomInfo;
     
     return (
@@ -36,3 +39,15 @@ export default function RoomAmenitiesContainer(props){
         </div>
     );
 }
+
+function RoomAmenitiesContainer(props){
+    const roomInfo = props.roomInfo;
+
+    return (
+        <ErrorBoundary>
+            <RoomAmenitiesContainerFunctionalComponent roomInfo={roomInfo} />
+        </ErrorBoundary>
+    );
+}
+
+export default RoomAmenitiesContainer;

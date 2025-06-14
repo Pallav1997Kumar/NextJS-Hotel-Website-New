@@ -13,9 +13,10 @@ import EventMeetingBookingInfo from "@/components/Booking Information Component/
 import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
 import { resetEventMeetingBookingInfo } from "@/redux store/features/Booking Information/eventMeetingBookingInfoSlice.js";
 import { EVENT_AND_MEETING_ROOMS_BOOKING_PROCESS_SUCCESSFUL } from "@/constant string files/apiSuccessMessageConstants.js";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary";
 
 
-function EventMeetingProceedPage(props){
+function EventMeetingProceedPageFunctionalComponent(){
     const dispatch = useAppDispatch();
     const router = useRouter();
 
@@ -138,5 +139,15 @@ function EventMeetingProceedPage(props){
         </div>
     );
 }
+
+
+function EventMeetingProceedPage(){
+    return(
+        <ErrorBoundary>
+            <EventMeetingProceedPageFunctionalComponent />
+        </ErrorBoundary>
+    );
+}
+
 
 export default EventMeetingProceedPage;

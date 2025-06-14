@@ -4,8 +4,10 @@ import Image from 'next/image';
 
 import styles from "./RoomBasicContainer.module.css";
 
+import ErrorBoundary from '@/components/Error Boundary/ErrorBoundary.jsx';
 
-export default function RoomBasicContainer(props) {
+
+function RoomBasicContainerFunctionalComponent(props) {
     const roomInfo = props.roomInfo;
 
     return(
@@ -29,3 +31,16 @@ export default function RoomBasicContainer(props) {
         </div>
     );
 }
+
+
+function RoomBasicContainer(props){
+    const roomInfo = props.roomInfo;
+    return (
+        <ErrorBoundary>
+            <RoomBasicContainerFunctionalComponent roomInfo={roomInfo} />
+        </ErrorBoundary>
+    );
+}
+
+
+export default RoomBasicContainer;

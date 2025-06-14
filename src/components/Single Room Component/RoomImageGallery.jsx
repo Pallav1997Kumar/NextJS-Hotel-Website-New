@@ -4,8 +4,10 @@ import Image from 'next/image';
 
 import styles from "./RoomImageGallery.module.css";
 
+import ErrorBoundary from '@/components/Error Boundary/ErrorBoundary.jsx';
 
-export default function RoomImageGallery(props) {
+
+function RoomImageGalleryFunctionalComponent(props) {
     const roomInfo = props.roomInfo;
     const noOfPhotos = roomInfo.photos.length;
 
@@ -70,3 +72,16 @@ export default function RoomImageGallery(props) {
         </div>
     );
 }
+
+
+function RoomImageGallery(props){
+    const roomInfo = props.roomInfo;
+    return (
+        <ErrorBoundary>
+            <RoomImageGalleryFunctionalComponent roomInfo={roomInfo} />
+        </ErrorBoundary>
+    );
+}
+
+
+export default RoomImageGallery;

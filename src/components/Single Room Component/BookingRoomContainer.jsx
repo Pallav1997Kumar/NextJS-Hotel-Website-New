@@ -22,6 +22,7 @@ import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux stor
 import { roomsSuitesSelectionErrorConstants } from "@/constant string files/roomsSuitesSelectionErrorConstants.js";
 import { INFORMATION_ADD_TO_CART_SUCCESSFUL } from "@/constant string files/apiSuccessMessageConstants.js";
 import { roomCounterConstant } from "@/constant string files/roomsImportantConstants.js";
+import ErrorBoundary from '@/components/Error Boundary/ErrorBoundary.jsx';
 
 
 const modalBoxStyle = {
@@ -63,7 +64,7 @@ function roomCounterReducer(state, action){
     }
 }
 
-export default function BookingRoomContainer(props) {
+function BookingRoomContainerFunctionalComponent(props) {
 
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -469,3 +470,14 @@ export default function BookingRoomContainer(props) {
     );
 }
 
+
+function BookingRoomContainer(props){
+    const roomInfo = props.roomInfo;
+    return (
+        <ErrorBoundary>
+            <BookingRoomContainerFunctionalComponent roomInfo={roomInfo} />
+        </ErrorBoundary>
+    );
+}
+
+export default BookingRoomContainer;

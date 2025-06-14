@@ -1,6 +1,5 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-//import { useDispatch } from 'react-redux';
 
 import styles from "./EventsMeetingBookingComponent.module.css";
 
@@ -12,9 +11,10 @@ import { getEventsFoodPrice } from "@/redux store/features/Price Features/Event 
 import { getEventsEachDayPrice } from "@/redux store/features/Price Features/Event Meeting Features/eachDayInformationSlice.js";
 import { getEventsSeatingArrangementPrice } from "@/redux store/features/Price Features/Event Meeting Features/eachDaySeatingArrangementSlice.js";
 import { roomBookingDateTypeConstants } from "@/constant string files/eventsMeetingRoomImportantConstants.js";
+import ErrorBoundary from '@/components/Error Boundary/ErrorBoundary.jsx';
 
 
-function EventsMeetingBookingComponent(props) {
+function EventsMeetingBookingComponentFunctionalComponent(props) {
     const meetingEventsInfoTitle = props.meetingEventsInfoTitle;
     const meetingEventsSeatingInfo = props.meetingEventsSeatingInfo;
     const meetingEventAreaPath = props.meetingEventAreaPath;
@@ -100,5 +100,23 @@ function EventsMeetingBookingComponent(props) {
         </div>
     );
 }
+
+
+function EventsMeetingBookingComponent(props){
+    const meetingEventsInfoTitle = props.meetingEventsInfoTitle;
+    const meetingEventsSeatingInfo = props.meetingEventsSeatingInfo;
+    const meetingEventAreaPath = props.meetingEventAreaPath;
+
+    return (
+        <ErrorBoundary>
+            <EventsMeetingBookingComponentFunctionalComponent 
+                meetingEventAreaPath={meetingEventAreaPath}
+                meetingEventsSeatingInfo={meetingEventsSeatingInfo}
+                meetingEventsInfoTitle={meetingEventsInfoTitle}
+            />
+        </ErrorBoundary>
+    );
+}
+
 
 export default EventsMeetingBookingComponent;

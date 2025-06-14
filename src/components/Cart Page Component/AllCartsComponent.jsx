@@ -11,15 +11,27 @@ import styles from "./AllCartsComponent.module.css";
 import RoomsBookingCartComponent from "@/components/Carts Component/RoomsBookingCartComponent.jsx";
 import DiningBookingCartComponent from "@/components/Carts Component/DiningBookingCartComponent.jsx";
 import EventMeetingRoomBookingCartComponent from "@/components/Carts Component/EventMeetingRoomBookingCartComponent.jsx";
-import { updateLoginPageCalledFrom, updateLoginRedirectPage } from '@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice';
-import { deleteParticularBookingFromRoomCart } from '@/redux store/features/Booking Features/roomBookingCartSlice';
-import { deleteParticularBookingFromDiningCart } from '@/redux store/features/Booking Features/diningBookingCartSlice';
-import { deleteParticularBookingFromEventMeetingCart } from '@/redux store/features/Booking Features/eventMeetingRoomBookingCartSlice';
+import { 
+    updateLoginPageCalledFrom, 
+    updateLoginRedirectPage 
+} from '@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice.js';
+import { deleteParticularBookingFromRoomCart } from '@/redux store/features/Booking Features/roomBookingCartSlice.js';
+import { deleteParticularBookingFromDiningCart } from '@/redux store/features/Booking Features/diningBookingCartSlice.js';
+import { deleteParticularBookingFromEventMeetingCart } from '@/redux store/features/Booking Features/eventMeetingRoomBookingCartSlice.js';
 import { roomBookingDateTypeConstants } from "@/constant string files/eventsMeetingRoomImportantConstants.js";
 import { INFORMATION_ADD_TO_CART_SUCCESSFUL } from "@/constant string files/apiSuccessMessageConstants.js";
+import ErrorBoundary from '@/components/Error Boundary/ErrorBoundary.jsx';
 
 
 function AllCartsComponent(){
+    return (
+        <ErrorBoundary>
+            <AllCartsComponentFunctionalComponent />
+        </ErrorBoundary>
+    );
+}
+
+function AllCartsComponentFunctionalComponent(){
 
     const dispatch = useDispatch();
 

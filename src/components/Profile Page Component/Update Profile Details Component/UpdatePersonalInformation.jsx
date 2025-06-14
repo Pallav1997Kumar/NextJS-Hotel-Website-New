@@ -10,11 +10,15 @@ import styles from './UpdatePersonalInformation.module.css';
 import InputAreaForEditInfo from "@/components/Input Area/InputAreaForEditInfo.jsx";
 import stylesLabel from "@/components/Input Area/InputAreaForEditInfo.module.css";
 import { useAppSelector, useAppDispatch } from "@/redux store/hooks";
-import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
+import { 
+    updateLoginPageCalledFrom, 
+    updateLoginRedirectPage 
+} from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice.js";
 import { updateUserDetails } from "@/redux store/features/Auth Features/loginUserDetailsSlice.js";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
 
-function UpdatePersonalInformation(){
+function UpdatePersonalInformationFunctionalComponent(){
 
     const loginUserDetails = useAppSelector((reduxStore)=> reduxStore.userSlice.loginUserDetails);
 
@@ -338,5 +342,15 @@ function UpdatePersonalInformation(){
         </div>
     )
 }
+
+
+function UpdatePersonalInformation(){
+    return (
+        <ErrorBoundary>
+            <UpdatePersonalInformationFunctionalComponent />
+        </ErrorBoundary>
+    );
+}
+
 
 export default UpdatePersonalInformation;

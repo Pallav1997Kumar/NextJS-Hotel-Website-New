@@ -7,13 +7,29 @@ import { useRouter } from 'next/navigation';
 
 import styles from './CurrentDiningRoomEventPage.module.css';
 
-import { EVENT_MEETING_ROOM_BOOKING_INFO_IS_PRESENT, EVENT_MEETING_ROOM_BOOKING_INFO_IS_EMPTY } from "@/constant string files/apiSuccessMessageConstants.js";
+import { 
+    EVENT_MEETING_ROOM_BOOKING_INFO_IS_PRESENT, 
+    EVENT_MEETING_ROOM_BOOKING_INFO_IS_EMPTY 
+} from "@/constant string files/apiSuccessMessageConstants.js";
 import EachAdminEventMeetingBookingInfo from "@/components/Admin Booking Information Component/Event Meeting Booking/EachAdminEventMeetingBookingInfo.jsx";
 import { useAppSelector, useAppDispatch } from "@/redux store/hooks.js";
-import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
+import { 
+    updateLoginPageCalledFrom, 
+    updateLoginRedirectPage 
+} from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice.js";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
 
 function CurrentEventMeetingBookingPage(){
+    return (
+        <ErrorBoundary>
+            <CurrentEventMeetingBookingPageFunctionalComponent />
+        </ErrorBoundary>
+    );
+}
+
+
+function CurrentEventMeetingBookingPageFunctionalComponent(){
 
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -40,7 +56,8 @@ function CurrentEventMeetingBookingPage(){
             return ;
         }
     
-        if(loginUserDetails != null && !loginUserDetails.emailAddress.endsWith("@royalpalace.co.in")){
+        if(loginUserDetails != null && 
+            !loginUserDetails.emailAddress.endsWith("@royalpalace.co.in")){
             const loginPageCalledFrom = 'Admin Current Event Meeting Rooms Page';
             const loginRedirectPage = '/admin-home-page';
             dispatch(updateLoginPageCalledFrom(loginPageCalledFrom));
@@ -60,7 +77,8 @@ function CurrentEventMeetingBookingPage(){
     const BOOKINGS_PER_PAGE = 5;
 
     useEffect(function(){
-        if(loginUserDetails != null && loginUserDetails.emailAddress.endsWith("@royalpalace.co.in")){
+        if(loginUserDetails != null && 
+            loginUserDetails.emailAddress.endsWith("@royalpalace.co.in")){
             fetchEventMeetingBookingDb();
         }
     }, []);
@@ -136,46 +154,51 @@ function CurrentEventMeetingBookingPage(){
                 </p>
             </div>
 
-            {(loadingBookingDetails && (loginUserDetails != null && loginUserDetails.emailAddress.endsWith("@royalpalace.co.in"))) &&
+            {(loadingBookingDetails && 
+                (loginUserDetails != null && 
+                loginUserDetails.emailAddress.endsWith("@royalpalace.co.in"))) &&
                 <div className={styles.loadingBookingDetails}>
                     <p> LOADING EVENT/ MEETING ROOMS BOOKING DETAILS...</p>
                 </div>
             }
 
-            {(loginUserDetails != null && loginUserDetails.emailAddress.endsWith("@royalpalace.co.in")) &&
-            <div className={styles.diningRoomsEventContainer}>
-                {(!loadingBookingDetails && eventMeetingBooking !== null && eventMeetingBooking.length == 0) &&
-                    <div className={styles.emptyBooking}>
-                        <p>There are no Current or Future Upcoming Events/ Meeting Room Bookings</p>
-                    </div>
-                }
-
-                {(!loadingBookingDetails && eventMeetingBooking !== null && eventMeetingBooking.length > 0) &&
-                    <div>
-                        {currentPageBookings.map(function(eachEventMeetingRoomBookingInfo){
-                            const eventMeetingBookingInfo =  eachEventMeetingRoomBookingInfo.bookingInfo; 
-                            return (
-                                <EachAdminEventMeetingBookingInfo 
-                                    eachEventMeetingBookingInfo={eventMeetingBookingInfo} 
-                                />
-                            );
-                        })}
-
-                        {/* Pagination controls */}
-                        <div className={styles.paginationContainer}>
-                            <Button onClick={goToPrevPage} variant="contained" disabled={currentPage === 1}>
-                                Prev
-                            </Button>
-                            <span>
-                                Page {currentPage} of {totalPages}
-                            </span>
-                            <Button onClick={goToNextPage} variant="contained" disabled={currentPage === totalPages}>
-                                Next
-                            </Button>
+            {(loginUserDetails != null && 
+                loginUserDetails.emailAddress.endsWith("@royalpalace.co.in")) &&
+                <div className={styles.diningRoomsEventContainer}>
+                    {(!loadingBookingDetails && eventMeetingBooking !== null && eventMeetingBooking.length == 0) &&
+                        <div className={styles.emptyBooking}>
+                            <p>There are no Current or Future Upcoming Events/ Meeting Room Bookings</p>
                         </div>
-                    </div>
-                }
-            </div>
+                    }
+
+                    {(!loadingBookingDetails && 
+                        eventMeetingBooking !== null && 
+                        eventMeetingBooking.length > 0) &&
+                        <div>
+                            {currentPageBookings.map(function(eachEventMeetingRoomBookingInfo){
+                                const eventMeetingBookingInfo =  eachEventMeetingRoomBookingInfo.bookingInfo; 
+                                return (
+                                    <EachAdminEventMeetingBookingInfo 
+                                        eachEventMeetingBookingInfo={eventMeetingBookingInfo} 
+                                    />
+                                );
+                            })}
+
+                            {/* Pagination controls */}
+                            <div className={styles.paginationContainer}>
+                                <Button onClick={goToPrevPage} variant="contained" disabled={currentPage === 1}>
+                                    Prev
+                                </Button>
+                                <span>
+                                    Page {currentPage} of {totalPages}
+                                </span>
+                                <Button onClick={goToNextPage} variant="contained" disabled={currentPage === totalPages}>
+                                    Next
+                                </Button>
+                            </div>
+                        </div>
+                    }
+                </div>
             }
 
         </div>

@@ -7,14 +7,27 @@ import { useRouter } from 'next/navigation';
 import styles from './UserPastAllBookingPage.module.css';
 
 import { useAppSelector, useAppDispatch } from "@/redux store/hooks";
-import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
-import { DINING_BOOKING_INFO_IS_PRESENT, DINING_BOOKING_INFO_IS_EMPTY } from "@/constant string files/apiSuccessMessageConstants.js";
-import { ROOMS_SUITES_BOOKING_INFO_IS_PRESENT, ROOMS_SUITES_BOOKING_INFO_IS_EMPTY } from "@/constant string files/apiSuccessMessageConstants.js";
-import { EVENT_MEETING_ROOM_BOOKING_INFO_IS_PRESENT, EVENT_MEETING_ROOM_BOOKING_INFO_IS_EMPTY } from "@/constant string files/apiSuccessMessageConstants.js";
+import { 
+    updateLoginPageCalledFrom, 
+    updateLoginRedirectPage 
+} from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice.js";
+import { 
+    DINING_BOOKING_INFO_IS_PRESENT, 
+    DINING_BOOKING_INFO_IS_EMPTY 
+} from "@/constant string files/apiSuccessMessageConstants.js";
+import { 
+    ROOMS_SUITES_BOOKING_INFO_IS_PRESENT, 
+    ROOMS_SUITES_BOOKING_INFO_IS_EMPTY 
+} from "@/constant string files/apiSuccessMessageConstants.js";
+import { 
+    EVENT_MEETING_ROOM_BOOKING_INFO_IS_PRESENT, 
+    EVENT_MEETING_ROOM_BOOKING_INFO_IS_EMPTY 
+} from "@/constant string files/apiSuccessMessageConstants.js";
 import UserAllBookingComponent from "@/components/User Booking Component/UserAllBookingComponent.jsx";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
 
-function UserPastAllBookingPage(){
+function UserPastAllBookingPageFunctionalComponent(){
 
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -203,6 +216,15 @@ function UserPastAllBookingPage(){
             </div>
 
         </React.Fragment>
+    );
+}
+
+
+function UserPastAllBookingPage(){
+    return(
+        <ErrorBoundary>
+            <UserPastAllBookingPageFunctionalComponent />
+        </ErrorBoundary>
     );
 }
 

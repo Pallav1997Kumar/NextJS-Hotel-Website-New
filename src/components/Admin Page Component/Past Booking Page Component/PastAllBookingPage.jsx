@@ -7,15 +7,30 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 import styles from './PastAllBookingPage.module.css';
 
-import { DINING_ROOMS_SUITES_EVENT_MEETING_BOOKING_INFO_IS_PRESENT, DINING_ROOMS_SUITES_EVENT_MEETING_BOOKING_INFO_IS_EMPTY } from "@/constant string files/apiSuccessMessageConstants.js";
+import { 
+    DINING_ROOMS_SUITES_EVENT_MEETING_BOOKING_INFO_IS_PRESENT, 
+    DINING_ROOMS_SUITES_EVENT_MEETING_BOOKING_INFO_IS_EMPTY 
+} from "@/constant string files/apiSuccessMessageConstants.js";
 import EachAdminEventMeetingBookingInfo from "@/components/Admin Booking Information Component/Event Meeting Booking/EachAdminEventMeetingBookingInfo.jsx";
-import EachAdminDiningBookingInfo from "@/components/Admin Booking Information Component/Dining Booking/EachAdminDiningBookingInfo";
-import EachAdminRoomBookingInfo from "@/components/Admin Booking Information Component/Rooms Suites Booking/EachAdminRoomBookingInfo";
+import EachAdminDiningBookingInfo from "@/components/Admin Booking Information Component/Dining Booking/EachAdminDiningBookingInfo.jsx";
+import EachAdminRoomBookingInfo from "@/components/Admin Booking Information Component/Rooms Suites Booking/EachAdminRoomBookingInfo.jsx";
 import { useAppSelector, useAppDispatch } from "@/redux store/hooks.js";
-import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
-
+import { 
+    updateLoginPageCalledFrom, 
+    updateLoginRedirectPage 
+} from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice.js";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
 function PastAllBookingPage(){
+    return (
+        <ErrorBoundary>
+            <PastAllBookingPageFunctionalComponent />
+        </ErrorBoundary>
+    );
+}
+
+
+function PastAllBookingPageFunctionalComponent(){
 
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -41,7 +56,8 @@ function PastAllBookingPage(){
         return ;
     }
     
-    if(loginUserDetails != null && !loginEmailAddress.endsWith("@royalpalace.co.in")){
+    if(loginUserDetails != null && 
+        !loginEmailAddress.endsWith("@royalpalace.co.in")){
         const loginPageCalledFrom = 'Admin Past Dining, Rooms Suites and Event Meeting Rooms Page';
         const loginRedirectPage = '/admin-home-page';
         dispatch(updateLoginPageCalledFrom(loginPageCalledFrom));
@@ -60,7 +76,8 @@ function PastAllBookingPage(){
 
 
     useEffect(function(){
-        if(loginUserDetails != null && loginUserDetails.emailAddress.endsWith("@royalpalace.co.in")){
+        if(loginUserDetails != null && 
+            loginUserDetails.emailAddress.endsWith("@royalpalace.co.in")){
             fetchDiningRoomSuiteEventMeetingBookingDb();
         }
     }, []);
@@ -125,79 +142,83 @@ function PastAllBookingPage(){
                     </Link>
                     <span>{'>>'}</span> 
                     <Link href="/admin-home-page/view-past-bookings"> 
-                        <span className={styles.breadcrumbsLink}> VIEW CURRENT OR UPCOMING BOOKINGS </span>
+                        <span className={styles.breadcrumbsLink}> VIEW PAST BOOKINGS </span>
                     </Link>
                 </p>
             </div>
 
 
-            {(loginUserDetails != null && loginUserDetails.emailAddress.endsWith("@royalpalace.co.in")) &&
-            <div className={styles.categoryBooking}>
-                <h4>Category Wise Bookings</h4>
-                <ol>
-                    <li>
-                        <Link href={"/admin-home-page/view-past-bookings/rooms-suites"}>
-                            Rooms & Suites Booking
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href={"/admin-home-page/view-past-bookings/dining"}>
-                            Dining Booking
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href={"/admin-home-page/view-past-bookings/events-meeting-room"}>
-                            Events/ Meeting Rooms Booking
-                        </Link>
-                    </li>
-                </ol>
-            </div>
+            {(loginUserDetails != null && 
+                loginUserDetails.emailAddress.endsWith("@royalpalace.co.in")) &&
+                <div className={styles.categoryBooking}>
+                    <h4>Category Wise Bookings</h4>
+                    <ol>
+                        <li>
+                            <Link href={"/admin-home-page/view-past-bookings/rooms-suites"}>
+                                Rooms & Suites Booking
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href={"/admin-home-page/view-past-bookings/dining"}>
+                                Dining Booking
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href={"/admin-home-page/view-past-bookings/events-meeting-room"}>
+                                Events/ Meeting Rooms Booking
+                            </Link>
+                        </li>
+                    </ol>
+                </div>
             }
                         
 
-            {((diningRoomSuiteEventMeetingBooking != null && diningRoomSuiteEventMeetingBooking.length > 0 && displayedDiningRoomSuiteEventMeetingBookings.length > 0) && (loginUserDetails != null && loginUserDetails.emailAddress.endsWith("@royalpalace.co.in"))) &&
-            <div className={styles.diningRoomsEventContainer}>
-                <h3>PAST BOOKINGS</h3>
-                <InfiniteScroll
-                    dataLength={displayedDiningRoomSuiteEventMeetingBookings.length}
-                    next={fetchNext}
-                    hasMore={hasMore}
-                    loader={<h4 className={styles.loaderMessage}>Loading more bookings...</h4>}
-                    endMessage={<p className={styles.endMessageStyle}>No more Dining, Rooms/ Suites and Event/ Meeting Rooms Bookings</p>}
-                >
-                    {displayedDiningRoomSuiteEventMeetingBookings.map(function(eachDiningRoomSuiteEventMeetingRoomBookingInfo){
-                        const eachBookingInfo =  eachDiningRoomSuiteEventMeetingRoomBookingInfo.bookingInfo; 
-                        if(eachBookingInfo.diningRestaurantTitle){
-                            const diningBookingInfo =  eachBookingInfo; 
-                            return (
-                                <EachAdminDiningBookingInfo 
-                                    eachDiningBookingInfo={diningBookingInfo} 
-                                />
-                            );
-                        }
-                        if(eachBookingInfo.bookingRoomTitle){
-                            const roomSuitesBookingInfo =  eachBookingInfo;  
-                            return (
-                                <EachAdminRoomBookingInfo 
-                                    eachRoomBookingInfo={roomSuitesBookingInfo} 
-                                />
-                            );          
-                        }
-                        if(eachBookingInfo.meetingEventsInfoTitle){
-                            const eventMeetingBookingInfo = eachBookingInfo;
-                            return (
-                                <EachAdminEventMeetingBookingInfo 
-                                    eachEventMeetingBookingInfo={eventMeetingBookingInfo} 
-                                />
-                            );
-                        }
-                        
-                    })}
-                </InfiniteScroll>               
-            </div>
+            {((diningRoomSuiteEventMeetingBooking != null && 
+                diningRoomSuiteEventMeetingBooking.length > 0 && 
+                displayedDiningRoomSuiteEventMeetingBookings.length > 0) && 
+                    (loginUserDetails != null && 
+                        loginUserDetails.emailAddress.endsWith("@royalpalace.co.in"))) &&
+                <div className={styles.diningRoomsEventContainer}>
+                    <h3>PAST BOOKINGS</h3>
+                    <InfiniteScroll
+                        dataLength={displayedDiningRoomSuiteEventMeetingBookings.length}
+                        next={fetchNext}
+                        hasMore={hasMore}
+                        loader={<h4 className={styles.loaderMessage}>Loading more bookings...</h4>}
+                        endMessage={<p className={styles.endMessageStyle}>No more Dining, Rooms/ Suites and Event/ Meeting Rooms Bookings</p>}
+                    >
+                        {displayedDiningRoomSuiteEventMeetingBookings.map(function(eachDiningRoomSuiteEventMeetingRoomBookingInfo){
+                            const eachBookingInfo =  eachDiningRoomSuiteEventMeetingRoomBookingInfo.bookingInfo; 
+                            if(eachBookingInfo.diningRestaurantTitle){
+                                const diningBookingInfo =  eachBookingInfo; 
+                                return (
+                                    <EachAdminDiningBookingInfo 
+                                        eachDiningBookingInfo={diningBookingInfo} 
+                                    />
+                                );
+                            }
+                            if(eachBookingInfo.bookingRoomTitle){
+                                const roomSuitesBookingInfo =  eachBookingInfo;  
+                                return (
+                                    <EachAdminRoomBookingInfo 
+                                        eachRoomBookingInfo={roomSuitesBookingInfo} 
+                                    />
+                                );          
+                            }
+                            if(eachBookingInfo.meetingEventsInfoTitle){
+                                const eventMeetingBookingInfo = eachBookingInfo;
+                                return (
+                                    <EachAdminEventMeetingBookingInfo 
+                                        eachEventMeetingBookingInfo={eventMeetingBookingInfo} 
+                                    />
+                                );
+                            }
+                            
+                        })}
+                    </InfiniteScroll>               
+                </div>
             }
                         
-
         </div>
     );
 

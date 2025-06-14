@@ -7,12 +7,19 @@ import { useRouter } from 'next/navigation';
 import styles from './UserCurrentDiningRoomEventPage.module.css';
 
 import { useAppSelector, useAppDispatch } from "@/redux store/hooks";
-import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
-import { ROOMS_SUITES_BOOKING_INFO_IS_PRESENT, ROOMS_SUITES_BOOKING_INFO_IS_EMPTY } from "@/constant string files/apiSuccessMessageConstants.js";
+import { 
+    updateLoginPageCalledFrom, 
+    updateLoginRedirectPage 
+} from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice.js";
+import { 
+    ROOMS_SUITES_BOOKING_INFO_IS_PRESENT, 
+    ROOMS_SUITES_BOOKING_INFO_IS_EMPTY 
+} from "@/constant string files/apiSuccessMessageConstants.js";
 import UserRoomsSuitesBookingComponent from "@/components/User Booking Component/UserRoomsSuitesBookingComponent.jsx";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
 
-function UserCurrentRoomsSuitesBookingPage(){
+function UserCurrentRoomsSuitesBookingPageFunctionalComponent(){
 
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -112,6 +119,15 @@ function UserCurrentRoomsSuitesBookingPage(){
         </div>
     );
 
+}
+
+
+function UserCurrentRoomsSuitesBookingPage(){
+    return(
+        <ErrorBoundary>
+            <UserCurrentRoomsSuitesBookingPageFunctionalComponent />
+        </ErrorBoundary>
+    );
 }
 
 

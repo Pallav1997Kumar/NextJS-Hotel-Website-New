@@ -7,13 +7,28 @@ import { useRouter } from 'next/navigation';
 
 import styles from './PastDiningRoomEventPage.module.css';
 
-import { ROOMS_SUITES_BOOKING_INFO_IS_PRESENT, ROOMS_SUITES_BOOKING_INFO_IS_EMPTY } from "@/constant string files/apiSuccessMessageConstants.js";
+import { 
+    ROOMS_SUITES_BOOKING_INFO_IS_PRESENT, 
+    ROOMS_SUITES_BOOKING_INFO_IS_EMPTY 
+} from "@/constant string files/apiSuccessMessageConstants.js";
 import EachAdminRoomBookingInfo from "@/components/Admin Booking Information Component/Rooms Suites Booking/EachAdminRoomBookingInfo.jsx";
 import { useAppSelector, useAppDispatch } from "@/redux store/hooks.js";
-import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
-
+import { 
+    updateLoginPageCalledFrom, 
+    updateLoginRedirectPage 
+} from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice.js";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
 function PastRoomsSuitesBookingPage(){
+    return(
+        <ErrorBoundary>
+            <PastRoomsSuitesBookingPageFunctionalComponent />
+        </ErrorBoundary>
+    );
+}
+
+
+function PastRoomsSuitesBookingPageFunctionalComponent(){
 
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -39,7 +54,8 @@ function PastRoomsSuitesBookingPage(){
         return ;
     }
     
-    if(loginUserDetails != null && !loginEmailAddress.endsWith("@royalpalace.co.in")){
+    if(loginUserDetails != null && 
+        !loginEmailAddress.endsWith("@royalpalace.co.in")){
         const loginPageCalledFrom = 'Admin Past Rooms Suites Page';
         const loginRedirectPage = '/admin-home-page';
         dispatch(updateLoginPageCalledFrom(loginPageCalledFrom));
@@ -56,7 +72,8 @@ function PastRoomsSuitesBookingPage(){
 
 
     useEffect(function(){
-        if(loginUserDetails != null && loginUserDetails.emailAddress.endsWith("@royalpalace.co.in")){
+        if(loginUserDetails != null && 
+            loginUserDetails.emailAddress.endsWith("@royalpalace.co.in")){
             fetchRoomSuiteBookingDb(page);
         }
     }, [page]);
@@ -127,25 +144,27 @@ function PastRoomsSuitesBookingPage(){
             </div>
 
 
-            {((roomSuitesBooking != null && roomSuitesBooking.length > 0) && (loginUserDetails != null && loginUserDetails.emailAddress.endsWith("@royalpalace.co.in"))) &&
-            <div className={styles.diningRoomsEventContainer}>
-                <InfiniteScroll
-                    dataLength={roomSuitesBooking.length}
-                    next={fetchNext}
-                    hasMore={hasMore}
-                    loader={<h4 className={styles.loaderMessage}>Loading more bookings...</h4>}
-                    endMessage={<p className={styles.endMessageStyle}>No more Rooms and Suites Bookings</p>}
-                >
-                    {roomSuitesBooking.map(function(eachRoomSuitesBookingInfo){
-                        const roomSuitesBookingInfo =  eachRoomSuitesBookingInfo.bookingInfo;  
-                        return (
-                            <EachAdminRoomBookingInfo 
-                                eachRoomBookingInfo={roomSuitesBookingInfo} 
-                            />
-                        );
-                    })}
-                </InfiniteScroll>               
-            </div>
+            {((roomSuitesBooking != null && roomSuitesBooking.length > 0) && 
+                (loginUserDetails != null && 
+                    loginUserDetails.emailAddress.endsWith("@royalpalace.co.in"))) &&
+                <div className={styles.diningRoomsEventContainer}>
+                    <InfiniteScroll
+                        dataLength={roomSuitesBooking.length}
+                        next={fetchNext}
+                        hasMore={hasMore}
+                        loader={<h4 className={styles.loaderMessage}>Loading more bookings...</h4>}
+                        endMessage={<p className={styles.endMessageStyle}>No more Rooms and Suites Bookings</p>}
+                    >
+                        {roomSuitesBooking.map(function(eachRoomSuitesBookingInfo){
+                            const roomSuitesBookingInfo =  eachRoomSuitesBookingInfo.bookingInfo;  
+                            return (
+                                <EachAdminRoomBookingInfo 
+                                    eachRoomBookingInfo={roomSuitesBookingInfo} 
+                                />
+                            );
+                        })}
+                    </InfiniteScroll>               
+                </div>
             }
 
         </div>

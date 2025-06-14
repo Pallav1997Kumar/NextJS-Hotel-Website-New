@@ -5,7 +5,10 @@ import Button from '@mui/material/Button';
 
 import styles from "./EventsMeetingsEachRoom.module.css";
 
-function EventsMeetingsEachRoom(props) {
+import ErrorBoundary from '@/components/Error Boundary/ErrorBoundary.jsx';
+
+
+function EventsMeetingsEachRoomFunctionalComponent(props) {
     const currentMeetingEvent = props.currentMeetingEvent;
     const meetingEventAreaPath = currentMeetingEvent.meetingEventAreaPath;
 
@@ -36,5 +39,16 @@ function EventsMeetingsEachRoom(props) {
     );
     
 }
+
+
+function EventsMeetingsEachRoom(props){
+    const currentMeetingEvent = props.currentMeetingEvent;
+    return (
+        <ErrorBoundary>
+            <EventsMeetingsEachRoomFunctionalComponent currentMeetingEvent={currentMeetingEvent} />
+        </ErrorBoundary>
+    );
+}
+
 
 export default EventsMeetingsEachRoom;

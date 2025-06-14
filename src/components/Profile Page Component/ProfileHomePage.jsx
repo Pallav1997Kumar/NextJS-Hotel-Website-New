@@ -8,9 +8,10 @@ import styles from "./ProfileHomePage.module.css";
 import { logout } from "@/redux store/features/Auth Features/loginUserDetailsSlice.js";
 import { useAppSelector, useAppDispatch } from "@/redux store/hooks.js";
 import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
 
-function ProfileHomePage(){
+function ProfileHomePageFunctionalComponent(){
 
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -118,6 +119,15 @@ function ProfileHomePage(){
             }
         </div>
     )
+}
+
+
+function ProfileHomePage(){
+    return (
+        <ErrorBoundary>
+            <ProfileHomePageFunctionalComponent />
+        </ErrorBoundary>
+    );
 }
 
 

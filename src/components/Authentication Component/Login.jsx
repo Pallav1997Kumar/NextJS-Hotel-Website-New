@@ -11,10 +11,23 @@ import styles from "./Login.module.css";
 import InputAreaForRegisterLogin from "@/components/Input Area/InputAreaForRegisterLogin.jsx";
 import { useAppDispatch , useAppSelector} from "@/redux store/hooks.js";
 import { login } from "@/redux store/features/Auth Features/loginUserDetailsSlice.js";
-import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
+import { 
+    updateLoginPageCalledFrom, 
+    updateLoginRedirectPage 
+} from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice.js";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
 
 function Login(){
+    return (
+        <ErrorBoundary>
+            <LoginFunctionalComponent />
+        </ErrorBoundary>
+    );
+}
+
+
+function LoginFunctionalComponent(){
     const router = useRouter();
 
     const loginPageCalledFrom = useAppSelector((reduxStore)=> reduxStore.loginPageCalledFromSliceName.loginPageCalledFrom);

@@ -8,13 +8,23 @@ import { useRouter } from 'next/navigation';
 import styles from './UserDiningRoomsSuitesEventMeetingStyle.module.css';
 
 import { useAppSelector, useAppDispatch } from "@/redux store/hooks";
-import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
+import { 
+    updateLoginPageCalledFrom, 
+    updateLoginRedirectPage 
+} from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice.js";
 import UserDiningBookingCart from "@/components/User Carts Component/UserDiningBookingCart.jsx";
-import { addDiningBookingInfo, resetDiningBookingInfo } from "@/redux store/features/Booking Information/diningBookingInfoSlice.js";
-import { DINING_PRESENT_IN_CART, DINING_CART_IS_EMPTY } from "@/constant string files/apiSuccessMessageConstants.js";
+import { 
+    addDiningBookingInfo, 
+    resetDiningBookingInfo 
+} from "@/redux store/features/Booking Information/diningBookingInfoSlice.js";
+import { 
+    DINING_PRESENT_IN_CART, 
+    DINING_CART_IS_EMPTY 
+} from "@/constant string files/apiSuccessMessageConstants.js";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
 
-function UserDiningCartPageComponent(){
+function UserDiningCartPageComponentFunctionalComponent(){
 
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -228,6 +238,15 @@ function UserDiningCartPageComponent(){
         </div>
     );
 
+}
+
+
+function UserDiningCartPageComponent(){
+    return(
+        <ErrorBoundary>
+            <UserDiningCartPageComponentFunctionalComponent />
+        </ErrorBoundary>
+    );
 }
 
 

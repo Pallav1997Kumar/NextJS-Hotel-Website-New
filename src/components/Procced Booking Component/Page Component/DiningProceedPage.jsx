@@ -13,9 +13,10 @@ import DiningBookingInfo from "@/components/Booking Information Component/Dining
 import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
 import { resetDiningBookingInfo } from "@/redux store/features/Booking Information/diningBookingInfoSlice.js";
 import { DINING_BOOKING_PROCESS_SUCCESSFUL } from "@/constant string files/apiSuccessMessageConstants.js";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary";
 
 
-function DiningProceedPage(props){
+function DiningProceedPageFunctionalComponent(){
     const dispatch = useAppDispatch();
     const router = useRouter();
     
@@ -137,5 +138,15 @@ function DiningProceedPage(props){
         </div>
     );
 }
+
+
+function DiningProceedPage(){
+    return(
+        <ErrorBoundary>
+            <DiningProceedPageFunctionalComponent />
+        </ErrorBoundary>
+    );
+}
+
 
 export default DiningProceedPage;

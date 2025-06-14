@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import ViewTransactionHistory from "@/components/Admin Page Component/View Transaction History/ViewTransactionHistory";
 
 

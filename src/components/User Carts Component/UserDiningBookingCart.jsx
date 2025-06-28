@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import styles from "./UserDiningBookingCart.module.css";
 
 import { getDateTextFromFullDate } from "@/functions/date.js";
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
+import { convertToINR } from '@/functions/currency.js';
 
 
 function UserDiningBookingCart(props){
@@ -100,7 +100,7 @@ function UserDiningBookingCart(props){
                             </p>
                             <p className={styles.diningCartEachInfo}>
                                 <span className={styles.diningCartEachInfoTitle}>Total Booking Price: </span>
-                                {CURRENCY_SYMBOL}{eachDiningInCart.priceForBooking}
+                                {convertToINR(eachDiningInCart.priceForBooking)}
                             </p>
                             <p className={styles.diningCartEachInfoTitle}>Total Number Of Tables</p>
                             <div className={styles.tableInformation}>

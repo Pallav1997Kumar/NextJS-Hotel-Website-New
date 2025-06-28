@@ -11,6 +11,7 @@ import styles from "./AddMoneyInAccount.module.css";
 import { useAppDispatch, useAppSelector } from "@/redux store/hooks.js";
 import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
 import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
+import { convertToINR } from "@/functions/currency.js";
 import { incorrectCardDetailsErrorConstant } from "@/constant string files/incorrectCardDetailsErrorConstant.js"
 import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
@@ -254,7 +255,7 @@ function AddMoneyInAccountFunctionalComponent(){
                                 value={amount} 
                                 onChange={(event)=>setAmount(event.target.value)}
                             />
-                            <p className={styles.minimumAmount}>Minimum {CURRENCY_SYMBOL}1000 to be added</p>
+                            <p className={styles.minimumAmount}>Minimum {convertToINR(1000)} to be added</p>
                         </div>
                         <div className={styles.amountProceed}>
                             <Button onClick={proceedClickHandler} size="medium" variant="outlined" color="success">Proceed</Button>

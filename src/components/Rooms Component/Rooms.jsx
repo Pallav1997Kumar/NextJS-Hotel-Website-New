@@ -5,7 +5,8 @@ import Button from '@mui/material/Button';
 
 import styles from "./Rooms.module.css";
 
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
+import { convertToINR } from "@/functions/currency.js";
+
 import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
 
@@ -37,16 +38,13 @@ async function RoomsFunctionalComponent(props){
                     <p>{description}</p>
                     <p><b>Total Room Size: </b>{totalRoomSize}</p>
 
-                    <p className={styles.startingPrice}><b>Price Starting at {CURRENCY_SYMBOL}{startingPriceOfRoom} only </b></p>
+                    <p className={styles.startingPrice}><b>Price Starting at {convertToINR(startingPriceOfRoom)} only </b></p>
 
                     <div className={styles.button}>
                         <div className={styles.explore}>
                             <Link href={`/rooms-suites/${path}`} passHref>
                                 <Button variant="outlined">EXPLORE</Button>
                             </Link>
-                        </div>
-                        <div className={styles.book}>
-                            <Button variant="contained">ADD TO CART</Button>
                         </div>                    
                     </div>
                 </div>

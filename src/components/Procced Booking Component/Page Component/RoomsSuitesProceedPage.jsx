@@ -10,10 +10,10 @@ import styles from './RoomsSuitesProceedPage.module.css';
 
 import { useAppSelector, useAppDispatch } from '@/redux store/hooks';
 import RoomSuitesBookingInfo from "@/components/Booking Information Component/Rooms Suites Booking/RoomSuitesBookingInfo.jsx";
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
 import { ROOMS_SUITES_BOOKING_PROCESS_SUCCESSFUL } from "@/constant string files/apiSuccessMessageConstants.js";
 import { resetRoomSuiteBookingInfo } from "@/redux store/features/Booking Information/roomSuiteBookingInfoSlice.js";
 import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary";
+import { convertToINR } from "@/functions/currency.js";
 
 
 function RoomsSuitesProceedPageFunctionalComponent(){
@@ -106,13 +106,13 @@ function RoomsSuitesProceedPageFunctionalComponent(){
 
             {showPaymentContainer && 
             <div className={styles.paymentContainer}>
-                <p className={styles.paymentAmount}>Please Pay {CURRENCY_SYMBOL}{roomsSuitesBookingAmount } for Rooms and Suites Booking</p>
+                <p className={styles.paymentAmount}>Please Pay {convertToINR(roomsSuitesBookingAmount)} for Rooms and Suites Booking</p>
                 {(roomsSuitesBookingAmount <= customerAccountBalance) && 
                     <div className={styles.sufficientBalance}>
-                        <p>Your Account has Balance {CURRENCY_SYMBOL}{customerAccountBalance}</p>
+                        <p>Your Account has Balance {convertToINR(customerAccountBalance)}</p>
                         {!performingPayment &&
                             <Button onClick={payRoomsSuitesBookingAmount} variant="contained">
-                                Pay {CURRENCY_SYMBOL}{roomsSuitesBookingAmount}
+                                Pay {convertToINR(roomsSuitesBookingAmount)}
                             </Button>
                         }
                         {performingPayment &&
@@ -125,10 +125,12 @@ function RoomsSuitesProceedPageFunctionalComponent(){
                 {(roomsSuitesBookingAmount > customerAccountBalance) && 
                     <div className={styles.insufficientBalance}>
                         <p>
-                            <FontAwesomeIcon icon={faCircleExclamation} />Warning: Your Account has Insufficient Balance. Current Balance in Account is {CURRENCY_SYMBOL}{customerAccountBalance}. Please add {CURRENCY_SYMBOL}{roomsSuitesBookingAmount - customerAccountBalance} to your Account.
+                            <FontAwesomeIcon icon={faCircleExclamation} />
+                            Warning: Your Account has Insufficient Balance. Current Balance in Account is {convertToINR(customerAccountBalance)}. 
+                            Please add {convertToINR(roomsSuitesBookingAmount - customerAccountBalance)} to your Account.
                         </p>
                         <Button disabled variant="contained">
-                            Pay {CURRENCY_SYMBOL}{roomsSuitesBookingAmount}
+                            Pay {convertToINR(roomsSuitesBookingAmount)}
                         </Button>
                     </div>
                 }

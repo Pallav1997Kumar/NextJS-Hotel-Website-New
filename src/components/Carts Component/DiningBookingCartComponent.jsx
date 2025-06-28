@@ -11,7 +11,7 @@ import styles from "./DiningBookingCartComponent.module.css";
 import { getDateTextFromFullDate } from "@/functions/date.js";
 import { useAppDispatch } from "@/redux store/hooks.js";
 import { deleteParticularBookingFromDiningCart } from "@/redux store/features/Booking Features/diningBookingCartSlice.js";
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
+import { convertToINR } from '@/functions/currency.js';
 
 
 function DiningBookingCartComponent(){
@@ -95,7 +95,7 @@ function DiningBookingCartComponent(){
                             </p>
                             <p className={styles.diningCartEachInfo}>
                                 <span className={styles.diningCartEachInfoTitle}>Total Booking Price: </span>
-                                {CURRENCY_SYMBOL}{eachDiningInCart.priceForBooking}
+                                {convertToINR(eachDiningInCart.priceForBooking)}
                             </p>
                             <p className={styles.diningCartEachInfoTitle}>Total Number Of Tables</p>
                             <div className={styles.tableInformation}>

@@ -10,10 +10,10 @@ import styles from './DiningProceedPage.module.css';
 
 import { useAppSelector, useAppDispatch } from '@/redux store/hooks';
 import DiningBookingInfo from "@/components/Booking Information Component/Dining Booking/DiningBookingInfo.jsx";
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
 import { resetDiningBookingInfo } from "@/redux store/features/Booking Information/diningBookingInfoSlice.js";
 import { DINING_BOOKING_PROCESS_SUCCESSFUL } from "@/constant string files/apiSuccessMessageConstants.js";
 import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary";
+import { convertToINR } from "@/functions/currency.js";
 
 
 function DiningProceedPageFunctionalComponent(){
@@ -106,13 +106,13 @@ function DiningProceedPageFunctionalComponent(){
 
             {showPaymentContainer && 
             <div className={styles.paymentContainer}>
-                <p className={styles.paymentAmount}>Please Pay {CURRENCY_SYMBOL}{diningBookingAmount} for Dining Booking</p>
+                <p className={styles.paymentAmount}>Please Pay {convertToINR(diningBookingAmount)} for Dining Booking</p>
                 {(diningBookingAmount <= customerAccountBalance) && 
                     <div className={styles.sufficientBalance}>
-                        <p>Your Account has Balance {CURRENCY_SYMBOL}{customerAccountBalance}</p>
+                        <p>Your Account has Balance {convertToINR(customerAccountBalance)}</p>
                         {!performingPayment &&
                             <Button onClick={payDiningBookingAmount} variant="contained">
-                                Pay {CURRENCY_SYMBOL}{diningBookingAmount}
+                                Pay {convertToINR(diningBookingAmount)}
                             </Button>
                         }
                         {performingPayment &&
@@ -125,10 +125,12 @@ function DiningProceedPageFunctionalComponent(){
                 {(diningBookingAmount > customerAccountBalance) && 
                     <div className={styles.insufficientBalance}>
                         <p>
-                            <FontAwesomeIcon icon={faCircleExclamation} />Warning: Your Account has Insufficient Balance. Current Balance in Account is {CURRENCY_SYMBOL}{customerAccountBalance}. Please add {CURRENCY_SYMBOL}{diningBookingAmount - customerAccountBalance} to your Account.
+                            <FontAwesomeIcon icon={faCircleExclamation} />
+                            Warning: Your Account has Insufficient Balance. Current Balance in Account is {convertToINR(customerAccountBalance)}. 
+                            Please add {convertToINR(diningBookingAmount - customerAccountBalance)} to your Account.
                         </p>
                         <Button disabled variant="contained">
-                            Pay {CURRENCY_SYMBOL}{diningBookingAmount}
+                            Pay {convertToINR(diningBookingAmount)}
                         </Button>
                     </div>
                 }

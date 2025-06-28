@@ -2,7 +2,7 @@ import styles from './EventMeetingMultipleDateNonContinuousBookingInfo.module.cs
 
 import EventMeetingEachDayNonContinuous from './EventMeetingEachDayNonContinuous.jsx';
 import { getDateTextFromFullDate } from "@/functions/date.js";
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
+import { convertToINR } from '@/functions/currency.js';
 
 
 function EventMeetingMultipleDateNonContinuousBookingInfo(props){
@@ -32,7 +32,7 @@ function EventMeetingMultipleDateNonContinuousBookingInfo(props){
             }
             <p>
                 <span className={styles.totalValueTitle}>Total Price All Rooms: </span>
-                {CURRENCY_SYMBOL}{eachEventMeetingBookingInfo.totalPriceOfAllDates}
+                {convertToINR(eachEventMeetingBookingInfo.totalPriceOfAllDates)}
             </p>
             
         </div>

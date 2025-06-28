@@ -7,9 +7,9 @@ import React, { useState } from 'react';
 import styles from './UserEventMeetingEachDayNonContinuous.module.css';
 
 import { getDateTextFromFullDate } from "@/functions/date.js";
-import { getCommaAndSeperatedArray, getSubarraysOfTwoElements } from "@/functions/array.js";
+import { getCommaAndSeperatedArray } from "@/functions/array.js";
 import { wantFoodServiceConstants, eventMeetingTimingConstants } from "@/constant string files/eventsMeetingRoomImportantConstants.js";
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
+import { convertToINR } from '@/functions/currency.js';
 
 
 const boxStyle = {
@@ -105,7 +105,7 @@ function UserEventMeetingEachDayNonContinuous(props){
                         </p>
                         <p className={styles.eachDateNumberInformationInsideBox}>
                             <span className={styles.eachDateNumberInformationTitle}>Price of Event/Meeting Room: </span>
-                            {CURRENCY_SYMBOL}{eachBookingDate.totalPriceEventMeetingRoom}
+                            {convertToINR(eachBookingDate.totalPriceEventMeetingRoom)}
                         </p>
                         {(eachBookingDate.wantFoodServices == wantFoodServiceConstants.WANT_FOOD_SERVICE_YES && Object.hasOwn(eachBookingDate,'selectedMealsOnBookingDate')) &&
                             <div>

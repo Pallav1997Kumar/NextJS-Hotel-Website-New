@@ -18,7 +18,7 @@ import { getDiningEachDayPrice } from "@/redux store/features/Price Features/din
 import { updateLoginPageCalledFrom, updateLoginRedirectPage } from '@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice';
 import { diningSelectionErrorConstants } from "@/constant string files/diningSelectionErrorConstants.js";
 import { INFORMATION_ADD_TO_CART_SUCCESSFUL } from "@/constant string files/apiSuccessMessageConstants.js";
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
+import { convertToINR } from '@/functions/currency.js';
 import ErrorBoundary from '@/components/Error Boundary/ErrorBoundary.jsx';
 
 
@@ -454,7 +454,7 @@ function DiningBookingComponentFunctionalComponent(props){
                         <Button variant="contained" disabled>Please Wait...</Button>
                         }
                         <p className={styles.availableSlot}>The Selected Date and Time Slot is available.</p>
-                        <p className={styles.availableSlot}>Please Pay {CURRENCY_SYMBOL}{priceForBooking} for Table Booking.</p>
+                        <p className={styles.availableSlot}>Please Pay {convertToINR(priceForBooking)} for Table Booking.</p>
                     </div>
                 }
                 

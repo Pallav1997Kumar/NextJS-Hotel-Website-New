@@ -15,7 +15,7 @@ import TableRow from '@mui/material/TableRow';
 import styles from './EachAdminRoomBookingInfo.module.css';
 
 import { calculateAgeFromDob, getDateTextFromFullDate, getDateTextFromOnlyDate } from "@/functions/date.js";
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
+import { convertToINR } from "@/functions/currency.js";
 
 
 const style = {
@@ -94,7 +94,7 @@ function EachAdminRoomBookingInfo(props){
                     </p>
                     <p className={styles.eachRoomOtherInfo}>
                         <span className={styles.eachRoomOtherInfoTitle}>Total Price Of Room: </span>
-                        {CURRENCY_SYMBOL}{eachRoomBookingInfo.totalPriceOfAllRooms} 
+                        {convertToINR(eachRoomBookingInfo.totalPriceOfAllRooms)} 
                     </p>
                     <Button variant='contained' onClick={()=> setViewMoreBookingDetails(true)}>
                         View Booking Details

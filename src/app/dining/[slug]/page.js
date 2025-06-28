@@ -7,7 +7,7 @@ import Link from 'next/link';
 import styles from "./page.module.css";
 
 import DiningBookingComponent from "@/components/Dining Component/DiningBookingComponent.jsx";
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
+import { convertToINR } from '@/functions/currency.js';
 
 
 export async function generateMetadata(context){
@@ -173,7 +173,7 @@ async function Page(context){
                 {startingPriceOfDiningArray.map(function(eachTablePrice){
                     return (
                         <p className={styles.eachTablePrice}>
-                            {eachTablePrice.minPriceTitle}: {CURRENCY_SYMBOL}{eachTablePrice.minPrice}
+                            {eachTablePrice.minPriceTitle}: {convertToINR(eachTablePrice.minPrice)}
                         </p>
                     )
                 })}

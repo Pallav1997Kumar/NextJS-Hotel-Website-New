@@ -161,9 +161,9 @@ function AdminLoginFunctionalComponent(){
                 </form>
                 
                 <div className={styles.registerNavigation}>
-                    <p>Don't have an account</p>
+                    <p>Are you customer</p>
                     <p className={styles.registerLink}>
-                        <Link href='/register'>Click here to Register</Link>
+                        <Link href='/login'>Click here to Login</Link>
                     </p>
                 </div>
             </div>

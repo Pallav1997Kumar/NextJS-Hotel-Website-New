@@ -13,7 +13,7 @@ import { useAppSelector } from "@/redux store/hooks.js";
 import EquipmentsPriceBreakup from '@/components/Events Meeting Component/Common Components/EquipmentsPriceBreakup.jsx';
 import MealsPriceBreakup from '@/components/Events Meeting Component/Common Components/MealsPriceBreakup.jsx';
 import { eventMeetingTimingConstants } from "@/constant string files/eventsMeetingRoomImportantConstants.js";
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
+import { convertToINR } from '@/functions/currency.js';
 
 
 function PriceDetailsEachDate(props) {
@@ -266,16 +266,16 @@ function PriceDetailsEachDate(props) {
                         <TableRow>
                             <TableCell>{getDateText(bookingDetails.meetingEventBookingDate)}</TableCell>
                             <TableCell>Morning</TableCell>
-                            <TableCell align="right">{CURRENCY_SYMBOL}{morningSlotBasicPrice}</TableCell>
+                            <TableCell align="right">{convertToINR(morningSlotBasicPrice)}</TableCell>
                             <TableCell align="right">
-                                {CURRENCY_SYMBOL}{totalPriceOfRoomAppliance}
+                                {convertToINR(totalPriceOfRoomAppliance)}
                                 <EquipmentsPriceBreakup 
                                     maximumGuestAttending={maximumGuestAttending} 
                                     seatingArrangementPriceList={seatingArrangementPriceList} 
                                 />
                             </TableCell>
                             <TableCell align="right">
-                                {CURRENCY_SYMBOL}{morningSlotTotalFoodPrice} 
+                                {convertToINR(morningSlotTotalFoodPrice)} 
                                 {(morningSlotTotalFoodPrice > 0) &&
                                 <MealsPriceBreakup 
                                     selectedMeals={selectedMorningMeals} 
@@ -284,7 +284,7 @@ function PriceDetailsEachDate(props) {
                                 />
                                 }
                             </TableCell>
-                            <TableCell align="right">{CURRENCY_SYMBOL}{morningSlotTotalPrice}</TableCell>
+                            <TableCell align="right">{convertToINR(morningSlotTotalPrice)}</TableCell>
                         </TableRow>
                         }
                         
@@ -292,16 +292,16 @@ function PriceDetailsEachDate(props) {
                         <TableRow>
                             <TableCell>{getDateText(bookingDetails.meetingEventBookingDate)}</TableCell>
                             <TableCell>Afternnon</TableCell>
-                            <TableCell align="right">{CURRENCY_SYMBOL}{afternoonSlotBasicPrice}</TableCell>
+                            <TableCell align="right">{convertToINR(afternoonSlotBasicPrice)}</TableCell>
                             <TableCell align="right">
-                                {CURRENCY_SYMBOL}{totalPriceOfRoomAppliance}
+                                {convertToINR(totalPriceOfRoomAppliance)}
                                 <EquipmentsPriceBreakup 
                                     maximumGuestAttending={maximumGuestAttending} 
                                     seatingArrangementPriceList={seatingArrangementPriceList} 
                                 />
                             </TableCell>
                             <TableCell align="right">
-                                {CURRENCY_SYMBOL}{afternoonSlotTotalFoodPrice}
+                                {convertToINR(afternoonSlotTotalFoodPrice)}
                                 {(afternoonSlotTotalFoodPrice > 0) &&
                                 <MealsPriceBreakup 
                                     selectedMeals={selectedAfternoonMeals} 
@@ -310,7 +310,7 @@ function PriceDetailsEachDate(props) {
                                 />
                                 }
                             </TableCell>
-                            <TableCell align="right">{CURRENCY_SYMBOL}{afternoonSlotTotalPrice}</TableCell>
+                            <TableCell align="right">{convertToINR(afternoonSlotTotalPrice)}</TableCell>
                         </TableRow>
                         }
                         
@@ -318,16 +318,16 @@ function PriceDetailsEachDate(props) {
                         <TableRow>
                             <TableCell>{getDateText(bookingDetails.meetingEventBookingDate)}</TableCell>
                             <TableCell>Evening</TableCell>
-                            <TableCell align="right">{CURRENCY_SYMBOL}{eveningSlotBasicPrice}</TableCell>
+                            <TableCell align="right">{convertToINR(eveningSlotBasicPrice)}</TableCell>
                             <TableCell align="right">
-                                {CURRENCY_SYMBOL}{totalPriceOfRoomAppliance}
+                                {convertToINR(totalPriceOfRoomAppliance)}
                                 <EquipmentsPriceBreakup 
                                     maximumGuestAttending={maximumGuestAttending} 
                                     seatingArrangementPriceList={seatingArrangementPriceList} 
                                 />
                             </TableCell>
                             <TableCell align="right">
-                                {CURRENCY_SYMBOL}{eveningSlotTotalFoodPrice}
+                                {convertToINR(eveningSlotTotalFoodPrice)}
                                 {(eveningSlotTotalFoodPrice > 0) &&
                                 <MealsPriceBreakup 
                                     selectedMeals={selectedEveningMeals} 
@@ -336,7 +336,7 @@ function PriceDetailsEachDate(props) {
                                 />
                                 }
                             </TableCell>
-                            <TableCell align="right">{CURRENCY_SYMBOL}{eveningSlotTotalPrice}</TableCell>
+                            <TableCell align="right">{convertToINR(eveningSlotTotalPrice)}</TableCell>
                         </TableRow>
                         }
                         
@@ -344,16 +344,16 @@ function PriceDetailsEachDate(props) {
                         <TableRow>
                             <TableCell>{getDateText(bookingDetails.meetingEventBookingDate)}</TableCell>
                             <TableCell>Night</TableCell>
-                            <TableCell align="right">{CURRENCY_SYMBOL}{nightSlotBasicPrice}</TableCell>
+                            <TableCell align="right">{convertToINR(nightSlotBasicPrice)}</TableCell>
                             <TableCell align="right">
-                                {CURRENCY_SYMBOL}{totalPriceOfRoomAppliance}
+                                {convertToINR(totalPriceOfRoomAppliance)}
                                 <EquipmentsPriceBreakup 
                                     maximumGuestAttending={maximumGuestAttending} 
                                     seatingArrangementPriceList={seatingArrangementPriceList} 
                                 />
                             </TableCell>
                             <TableCell align="right">
-                                {CURRENCY_SYMBOL}{nightSlotTotalFoodPrice}
+                                {convertToINR(nightSlotTotalFoodPrice)}
                                 {(nightSlotTotalFoodPrice > 0) &&
                                 <MealsPriceBreakup 
                                     selectedMeals={selectedNightMeals} 
@@ -362,7 +362,7 @@ function PriceDetailsEachDate(props) {
                                 />
                                 }
                             </TableCell>
-                            <TableCell align="right">{CURRENCY_SYMBOL}{nightSlotTotalPrice}</TableCell>
+                            <TableCell align="right">{convertToINR(nightSlotTotalPrice)}</TableCell>
                         </TableRow>
                         }
                         
@@ -370,16 +370,16 @@ function PriceDetailsEachDate(props) {
                         <TableRow>
                             <TableCell>{getDateText(bookingDetails.meetingEventBookingDate)}</TableCell>
                             <TableCell>Mid Night</TableCell>
-                            <TableCell align="right">{CURRENCY_SYMBOL}{midNightSlotBasicPrice}</TableCell>
+                            <TableCell align="right">{convertToINR(midNightSlotBasicPrice)}</TableCell>
                             <TableCell align="right">
-                                {CURRENCY_SYMBOL}{totalPriceOfRoomAppliance}
+                                {convertToINR(totalPriceOfRoomAppliance)}
                                 <EquipmentsPriceBreakup 
                                     maximumGuestAttending={maximumGuestAttending} 
                                     seatingArrangementPriceList={seatingArrangementPriceList} 
                                 />
                             </TableCell>
                             <TableCell align="right">
-                                {CURRENCY_SYMBOL}{midNightSlotTotalFoodPrice}
+                                {convertToINR(midNightSlotTotalFoodPrice)}
                                 {(midNightSlotTotalFoodPrice > 0) &&
                                 <MealsPriceBreakup 
                                     selectedMeals={selectedMidNightMeals} 
@@ -388,7 +388,7 @@ function PriceDetailsEachDate(props) {
                                 />
                                 }
                             </TableCell>
-                            <TableCell align="right">{CURRENCY_SYMBOL}{midNightSlotTotalPrice}</TableCell>
+                            <TableCell align="right">{convertToINR(midNightSlotTotalPrice)}</TableCell>
                         </TableRow>
                         }
 
@@ -398,7 +398,7 @@ function PriceDetailsEachDate(props) {
                             <TableCell></TableCell>
                             <TableCell></TableCell>
                             <TableCell></TableCell>
-                            <TableCell sx={totalStyling} align="right">{CURRENCY_SYMBOL}{allSlotsTotalPrice}</TableCell>
+                            <TableCell sx={totalStyling} align="right">{convertToINR(allSlotsTotalPrice)}</TableCell>
                         </TableRow>
 
                     </TableBody>

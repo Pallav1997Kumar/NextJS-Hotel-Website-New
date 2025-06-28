@@ -8,7 +8,7 @@ import styles from "./EachRoomCartComponent.module.css";
 import { getDateTextFromOnlyDate } from "@/functions/date.js";
 import { useAppDispatch } from "@/redux store/hooks.js";
 import { deleteParticularBookingFromRoomCart } from "@/redux store/features/Booking Features/roomBookingCartSlice.js";
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
+import { convertToINR } from "@/functions/currency.js";
 
 
 function EachRoomCartComponent(props){
@@ -75,7 +75,7 @@ function EachRoomCartComponent(props){
                     </p>
                     <p className={styles.eachRoomOtherInfo}>
                         <span className={styles.eachRoomOtherInfoTitle}>Total Price Of Room: </span>
-                        {CURRENCY_SYMBOL}{eachRoomInCart.totalPriceOfAllRooms} 
+                        {convertToINR(eachRoomInCart.totalPriceOfAllRooms)} 
                     </p>
                     <Button onClick={()=> removeRoomFromCartHandler(eachRoomInCart.roomCartId)} variant="contained">
                         Remove From Cart

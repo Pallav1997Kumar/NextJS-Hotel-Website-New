@@ -7,9 +7,10 @@ import styles from "./Navbar.module.css";
 
 import { useAppSelector, useAppDispatch } from "@/redux store/hooks.js";
 import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
 
-function Navbar(){
+function NavbarFunctionalComponent(){
     const loginUserDetails = useAppSelector((reduxStore)=> reduxStore.userSlice.loginUserDetails);
     console.log(loginUserDetails);
 
@@ -92,6 +93,15 @@ function Navbar(){
             </div>
             }
         </div>
+    );
+}
+
+
+function Navbar(){
+    return (
+        <ErrorBoundary>
+            <NavbarFunctionalComponent />
+        </ErrorBoundary>
     );
 }
 

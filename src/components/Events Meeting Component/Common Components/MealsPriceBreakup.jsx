@@ -11,7 +11,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
+import { convertToINR } from '@/functions/currency.js';
 
 
 function MealsPriceBreakup(props) {
@@ -90,9 +90,9 @@ function MealsPriceBreakup(props) {
                                             <TableCell>
                                                 {(eachFoodItem.foodTitle).split('(')[0]}
                                             </TableCell>
-                                            <TableCell>{CURRENCY_SYMBOL}{eachFoodItem.pricePerGuest}</TableCell>
+                                            <TableCell>{convertToINR(eachFoodItem.pricePerGuest)}</TableCell>
                                             <TableCell>{maximumGuestAttending}</TableCell>
-                                            <TableCell>{CURRENCY_SYMBOL}{eachFoodItem.pricePerGuest * maximumGuestAttending}</TableCell>
+                                            <TableCell>{convertToINR(eachFoodItem.pricePerGuest * maximumGuestAttending)}</TableCell>
                                         </TableRow>
                                     )
                                 })}
@@ -100,7 +100,7 @@ function MealsPriceBreakup(props) {
                                     <TableCell>Total</TableCell>
                                     <TableCell></TableCell>
                                     <TableCell></TableCell>
-                                    <TableCell>{CURRENCY_SYMBOL}{totalPriceOfMeals}</TableCell>
+                                    <TableCell>{convertToINR(totalPriceOfMeals)}</TableCell>
                                 </TableRow>
                             </TableBody>
                         </Table>

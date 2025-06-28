@@ -12,7 +12,7 @@ import EventMeetingFoodServices from "./Food Services Of Event/EventMeetingFoodS
 import { useAppDispatch } from "@/redux store/hooks.js";
 import { deleteParticularBookingFromEventMeetingCart } from "@/redux store/features/Booking Features/eventMeetingRoomBookingCartSlice.js";
 import { wantFoodServiceConstants } from "@/constant string files/eventsMeetingRoomImportantConstants.js";
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
+import { convertToINR } from '@/functions/currency.js';
 
 
 const boxStyle = {
@@ -73,7 +73,7 @@ function EventMeetingSingleDateCartComponent(props){
             </p>
             <p className={styles.eventMeetingCartEachInfo}>
                 <span className={styles.eventMeetingCartEachInfoTitle}>Total Price of Event/Meeting Room: </span>
-                {CURRENCY_SYMBOL}{eachEventMeetingInCart.totalPriceEventMeetingRoom}
+                {convertToINR(eachEventMeetingInCart.totalPriceEventMeetingRoom)}
             </p>
             <div className={styles.buttonContainer}>
                 <Button onClick={()=>removeCartHandler(eachEventMeetingInCart.eventCartId)} variant="contained">

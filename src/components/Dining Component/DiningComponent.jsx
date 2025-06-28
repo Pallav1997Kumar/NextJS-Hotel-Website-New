@@ -5,7 +5,8 @@ import Button from '@mui/material/Button';
 
 import styles from "./DiningComponent.module.css";
 
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
+import { convertToINR } from '@/functions/currency.js';
+
 import ErrorBoundary from '@/components/Error Boundary/ErrorBoundary.jsx';
 
 
@@ -61,7 +62,7 @@ async function DiningComponentFunctionalComponent(props) {
                     </div>
                 </div>
                 <div className={styles.startingPrice}>
-                    <p>Booking Price Starts at {CURRENCY_SYMBOL}{startingPriceOfDining}</p>
+                    <p>Booking Price Starts at {convertToINR(startingPriceOfDining)} </p>
                 </div>
                 <div className={styles.buttonConatainer}>
                     <Link href={`/dining/${diningPath}`}>

@@ -7,10 +7,10 @@ import React, { useState } from 'react';
 import styles from './UserEventMeetingMultipleDateContinuousCart.module.css';
 
 import { getDateTextFromFullDate } from "@/functions/date.js";
-import { getCommaAndSeperatedArray, getSubarraysOfTwoElements } from "@/functions/array.js";
+import { getCommaAndSeperatedArray } from "@/functions/array.js";
 import UserEventMeetingFoodServices from "./Food Services Of Event/UserEventMeetingFoodServices.jsx";
 import { wantFoodServiceConstants } from "@/constant string files/eventsMeetingRoomImportantConstants.js";
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
+import { convertToINR } from '@/functions/currency.js';
 
 
 const boxStyle = {
@@ -75,7 +75,7 @@ function UserEventMeetingMultipleDateContinuousCart(props){
             </p>
             <p className={styles.eventMeetingCartEachInfo}>
                 <span className={styles.eventMeetingCartEachInfoTitle}>Total Price of Event/Meeting Room: </span>
-                {CURRENCY_SYMBOL}{eachEventMeetingInCart.totalPriceEventMeetingRoom}
+                {convertToINR(eachEventMeetingInCart.totalPriceEventMeetingRoom)}
             </p>
             <div className={styles.buttonContainer}>
                 

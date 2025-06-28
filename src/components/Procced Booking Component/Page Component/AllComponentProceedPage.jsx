@@ -12,12 +12,12 @@ import { useAppSelector, useAppDispatch } from '@/redux store/hooks';
 import DiningBookingInfo from "@/components/Booking Information Component/Dining Booking/DiningBookingInfo.jsx";
 import RoomSuitesBookingInfo from "@/components/Booking Information Component/Rooms Suites Booking/RoomSuitesBookingInfo.jsx";
 import EventMeetingBookingInfo from "@/components/Booking Information Component/Event Meeting Booking/EventMeetingBookingInfo.jsx";
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
 import { resetDiningBookingInfo } from "@/redux store/features/Booking Information/diningBookingInfoSlice.js";
 import { resetEventMeetingBookingInfo } from "@/redux store/features/Booking Information/eventMeetingBookingInfoSlice.js";
 import { resetRoomSuiteBookingInfo } from "@/redux store/features/Booking Information/roomSuiteBookingInfoSlice.js";
 import { ROOMS_SUITES_DINING_EVENT_MEETING_ROOM_BOOKING_PROCESS_SUCCESSFUL } from "@/constant string files/apiSuccessMessageConstants.js";
 import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary";
+import { convertToINR } from "@/functions/currency.js";
 
 
 function AllComponentProceedPageFunctionalComponent(){
@@ -141,13 +141,13 @@ function AllComponentProceedPageFunctionalComponent(){
 
             {showPaymentContainer && 
             <div className={styles.paymentContainer}>
-                <p className={styles.paymentAmount}>Please Pay {CURRENCY_SYMBOL}{allComponentTotalBookingAmount} for All Types of Booking</p>
+                <p className={styles.paymentAmount}>Please Pay {convertToINR(allComponentTotalBookingAmount)} for All Types of Booking</p>
                 {(allComponentTotalBookingAmount <= customerAccountBalance) && 
                     <div className={styles.sufficientBalance}>
-                        <p>Your Account has Balance {CURRENCY_SYMBOL}{customerAccountBalance}</p>
+                        <p>Your Account has Balance {convertToINR(customerAccountBalance)}</p>
                         {!performingPayment &&
                             <Button onClick={payAllComponentTotalBookingAmount} variant="contained">
-                                Pay {CURRENCY_SYMBOL}{allComponentTotalBookingAmount}
+                                Pay {convertToINR(allComponentTotalBookingAmount)}
                             </Button>
                         }
                         {performingPayment &&
@@ -160,10 +160,12 @@ function AllComponentProceedPageFunctionalComponent(){
                 {(allComponentTotalBookingAmount > customerAccountBalance) && 
                     <div className={styles.insufficientBalance}>
                         <p>
-                            <FontAwesomeIcon icon={faCircleExclamation} />Warning: Your Account has Insufficient Balance. Current Balance in Account is {CURRENCY_SYMBOL}{customerAccountBalance}. Please add {CURRENCY_SYMBOL}{allComponentTotalBookingAmount - customerAccountBalance} to your Account.
+                            <FontAwesomeIcon icon={faCircleExclamation} />
+                            Warning: Your Account has Insufficient Balance. Current Balance in Account is {convertToINR(customerAccountBalance)}. 
+                            Please add {convertToINR(allComponentTotalBookingAmount - customerAccountBalance)} to your Account.
                         </p>
                         <Button disabled variant="contained">
-                            Pay {CURRENCY_SYMBOL}{allComponentTotalBookingAmount}
+                            Pay {convertToINR(allComponentTotalBookingAmount)}
                         </Button>
                     </div>
                 }

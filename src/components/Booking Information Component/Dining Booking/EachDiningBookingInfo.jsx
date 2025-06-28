@@ -5,7 +5,7 @@ import Image from 'next/image';
 import styles from './EachDiningBookingInfo.module.css';
 
 import { getDateTextFromFullDate } from "@/functions/date.js";
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
+import { convertToINR } from '@/functions/currency.js';
 
 
 function EachDiningBookingInfo(props){
@@ -72,7 +72,7 @@ function EachDiningBookingInfo(props){
                 </p>
                 <p className={styles.diningBookingInfoEachInfo}>
                     <span className={styles.diningBookingInfoEachInfoTitle}>Total Booking Price: </span>
-                    {CURRENCY_SYMBOL}{eachDiningBookingInfo.priceForBooking}
+                    {convertToINR(eachDiningBookingInfo.priceForBooking)}
                 </p>
                 <p className={styles.diningBookingInfoEachInfoTitle}>Total Number Of Tables</p>
                 <div className={styles.tableInformation}>

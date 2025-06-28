@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
 import { calculateAgeFromDob, getDateTextFromFullDate, utcTimeToISTConvesion } from "@/functions/date";
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants";
+import { convertToINR } from "@/functions/currency.js";
 
 
 const tableBodyStyle = {
@@ -46,7 +46,7 @@ function ViewPracticularTransactionDetails(props){
             <TableCell sx={tableBodyStyle}>{eachTransactionDetails.customerDetails.emailAddress}</TableCell>
             <TableCell sx={tableBodyStyle}>{utcTimeToISTConvesion(eachTransactionDetails.transactionDateTime.toString())}</TableCell>
             <TableCell sx={tableBodyStyle}>{eachTransactionDetails.transactionType}</TableCell>
-            <TableCell sx={tableBodyStyle}>{CURRENCY_SYMBOL}{eachTransactionDetails.transactionAmount}</TableCell>
+            <TableCell sx={tableBodyStyle}>{convertToINR(eachTransactionDetails.transactionAmount)}</TableCell>
             <TableCell sx={tableBodyStyle}>{eachTransactionDetails.transactionDescription}</TableCell>
             <TableCell sx={tableBodyStyle}>
                 <Button color="error" variant="outlined" onClick={()=>setOpenCustomerDetails(true)}>

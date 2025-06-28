@@ -10,10 +10,10 @@ import styles from './EventMeetingProceedPage.module.css';
 
 import { useAppSelector, useAppDispatch } from '@/redux store/hooks';
 import EventMeetingBookingInfo from "@/components/Booking Information Component/Event Meeting Booking/EventMeetingBookingInfo.jsx";
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
 import { resetEventMeetingBookingInfo } from "@/redux store/features/Booking Information/eventMeetingBookingInfoSlice.js";
 import { EVENT_AND_MEETING_ROOMS_BOOKING_PROCESS_SUCCESSFUL } from "@/constant string files/apiSuccessMessageConstants.js";
 import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary";
+import { convertToINR } from "@/functions/currency.js";
 
 
 function EventMeetingProceedPageFunctionalComponent(){
@@ -107,13 +107,13 @@ function EventMeetingProceedPageFunctionalComponent(){
 
             {showPaymentContainer && 
             <div className={styles.paymentContainer}>
-                <p className={styles.paymentAmount}>Please Pay {CURRENCY_SYMBOL}{eventMeetingBookingAmount} for Event/ Meeting Rooms Booking</p>
+                <p className={styles.paymentAmount}>Please Pay {convertToINR(eventMeetingBookingAmount)} for Event/ Meeting Rooms Booking</p>
                 {(eventMeetingBookingAmount <= customerAccountBalance) && 
                     <div className={styles.sufficientBalance}>
-                        <p>Your Account has Balance {CURRENCY_SYMBOL}{customerAccountBalance}</p>
+                        <p>Your Account has Balance {convertToINR(customerAccountBalance)}</p>
                         {!performingPayment &&
                             <Button onClick={payEventMeetingBookingAmount} variant="contained">
-                                Pay {CURRENCY_SYMBOL}{eventMeetingBookingAmount}
+                                Pay {convertToINR(eventMeetingBookingAmount)}
                             </Button>
                         }
                         {performingPayment &&
@@ -126,10 +126,12 @@ function EventMeetingProceedPageFunctionalComponent(){
                 {(eventMeetingBookingAmount > customerAccountBalance) && 
                     <div className={styles.insufficientBalance}>
                         <p>
-                            <FontAwesomeIcon icon={faCircleExclamation} />Warning: Your Account has Insufficient Balance. Current Balance in Account is {CURRENCY_SYMBOL}{customerAccountBalance}. Please add {CURRENCY_SYMBOL}{eventMeetingBookingAmount - customerAccountBalance} to your Account.
+                            <FontAwesomeIcon icon={faCircleExclamation} />
+                            Warning: Your Account has Insufficient Balance. Current Balance in Account is {convertToINR(customerAccountBalance)}. 
+                            Please add {convertToINR(eventMeetingBookingAmount - customerAccountBalance)} to your Account.
                         </p>
                         <Button disabled variant="contained">
-                            Pay {CURRENCY_SYMBOL}{eventMeetingBookingAmount}
+                            Pay {convertToINR(eventMeetingBookingAmount)}
                         </Button>
                     </div>
                 }

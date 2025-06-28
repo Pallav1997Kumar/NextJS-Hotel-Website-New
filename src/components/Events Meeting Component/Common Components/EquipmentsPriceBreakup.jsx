@@ -11,7 +11,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
+import { convertToINR } from '@/functions/currency.js';
 
 
 function EquipmentsPriceBreakup(props) {
@@ -89,7 +89,7 @@ function EquipmentsPriceBreakup(props) {
                                     return (
                                         <TableRow>
                                             <TableCell>{eachListItem.priceNameProperty}</TableCell>
-                                            <TableCell>{CURRENCY_SYMBOL}{eachListItem.priceOfProperty}</TableCell>
+                                            <TableCell>{convertToINR(eachListItem.priceOfProperty)}</TableCell>
                                         </TableRow>
                                     )
                                 })}
@@ -107,7 +107,7 @@ function EquipmentsPriceBreakup(props) {
                                     return (
                                         <TableRow>
                                             <TableCell>{eachListItem.priceNameProperty}</TableCell>
-                                            <TableCell>{CURRENCY_SYMBOL}{eachListItem.priceOfProperty}</TableCell>
+                                            <TableCell>{convertToINR(eachListItem.priceOfProperty)}</TableCell>
                                         </TableRow>
                                     )
                                 })} 
@@ -116,14 +116,14 @@ function EquipmentsPriceBreakup(props) {
                                     return (
                                         <TableRow>
                                             <TableCell>{eachListItem.priceNameProperty}</TableCell>
-                                            <TableCell>{CURRENCY_SYMBOL}{eachListItem.priceOfProperty}</TableCell>
+                                            <TableCell>{convertToINR(eachListItem.priceOfProperty)}</TableCell>
                                         </TableRow>
                                        )
                                 })} 
 
                                 <TableRow>
                                     <TableCell>Total Price</TableCell>
-                                    <TableCell>{CURRENCY_SYMBOL}{totalPriceForEquipments}</TableCell>
+                                    <TableCell>{convertToINR(totalPriceForEquipments)}</TableCell>
                                 </TableRow>
 
                             </TableBody>

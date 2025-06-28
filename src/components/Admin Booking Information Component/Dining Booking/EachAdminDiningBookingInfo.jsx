@@ -15,7 +15,7 @@ import TableRow from '@mui/material/TableRow';
 import styles from './EachAdminDiningBookingInfo.module.css';
 
 import { calculateAgeFromDob, getDateTextFromFullDate } from "@/functions/date.js";
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
+import { convertToINR } from '@/functions/currency.js';
 
 
 const style = {
@@ -95,7 +95,7 @@ function EachAdminDiningBookingInfo(props){
                 </p>
                 <p className={styles.diningBookingInfoEachInfo}>
                     <span className={styles.diningBookingInfoEachInfoTitle}>Total Booking Price: </span>
-                    {CURRENCY_SYMBOL}{eachDiningBookingInfo.priceForBooking}
+                    {convertToINR(eachDiningBookingInfo.priceForBooking)}
                 </p>
                 <p className={styles.diningBookingInfoEachInfoTitle}>Total Number Of Tables</p>
                 <div className={styles.tableInformation}>

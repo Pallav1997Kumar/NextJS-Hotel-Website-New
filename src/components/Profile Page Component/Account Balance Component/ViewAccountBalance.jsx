@@ -16,7 +16,7 @@ import styles from './ViewAccountBalance.module.css';
 import { useAppDispatch, useAppSelector } from "@/redux store/hooks";
 import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
 import { utcTimeToISTConvesion } from "@/functions/date.js";
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
+import { convertToINR } from "@/functions/currency.js";
 import { TRANSACTION_HISTORY_FOUND, NO_TRANSACTION_HISTORY_FOUND } from "@/constant string files/apiSuccessMessageConstants.js";
 import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
@@ -122,7 +122,7 @@ function ViewAccountBalanceFunctionalComponent() {
             <div className={styles.viewBalance}>
                 <div className={styles.viewBalanceAmount}>
                     <h3>Account Balance: </h3>
-                    <p>{CURRENCY_SYMBOL}{loginCustomerInfo.accountBalance}</p>
+                    <p>{convertToINR(loginCustomerInfo.accountBalance)}</p>
                 </div>
                 <div className={styles.transactionButton}>
                     <Button onClick={()=> setShowTransaction(true)} variant="outlined">View Transaction</Button>
@@ -155,8 +155,8 @@ function ViewAccountBalanceFunctionalComponent() {
                                     <TableRow>
                                         <TableCell>{utcTimeToISTConvesion(eachTransaction.transactionDateTime.toString())}</TableCell>
                                         <TableCell>{eachTransaction.transactionType}</TableCell>
-                                        <TableCell>{CURRENCY_SYMBOL}{eachTransaction.transactionAmount}</TableCell>
-                                        <TableCell>{CURRENCY_SYMBOL}{eachTransaction.updatedAccountBalance}</TableCell>
+                                        <TableCell>{convertToINR(eachTransaction.transactionAmount)}</TableCell>
+                                        <TableCell>{convertToINR(eachTransaction.updatedAccountBalance)}</TableCell>
                                     </TableRow>
                                 );
                             })}

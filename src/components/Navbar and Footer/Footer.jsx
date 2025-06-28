@@ -11,9 +11,10 @@ import styles from "./Footer.module.css";
 import hotelBasicInfo from "@/json objects/hotelBasicInfo.js";
 import { useAppDispatch } from "@/redux store/hooks.js";
 import { updateLoginPageCalledFrom, updateLoginRedirectPage } from "@/redux store/features/Login Page Called From Features/loginPageCalledFromSlice";
+import ErrorBoundary from "@/components/Error Boundary/ErrorBoundary.jsx";
 
 
-function Footer() {
+function FooterFunctionalComponent() {
 
    const router = useRouter();
    const dispatch = useAppDispatch();
@@ -127,6 +128,15 @@ function Footer() {
         </div>
     </div>
    ); 
+}
+
+
+function Footer(){
+   return (
+      <ErrorBoundary>
+         <FooterFunctionalComponent />
+      </ErrorBoundary>
+   );
 }
 
 export default Footer;

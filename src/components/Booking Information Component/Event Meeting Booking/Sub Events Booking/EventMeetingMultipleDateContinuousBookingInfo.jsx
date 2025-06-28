@@ -7,10 +7,10 @@ import React, { useState } from 'react';
 import styles from './EventMeetingMultipleDateContinuousBookingInfo.module.css';
 
 import { getDateTextFromFullDate } from "@/functions/date.js";
-import { getCommaAndSeperatedArray, getSubarraysOfTwoElements } from "@/functions/array.js";
+import { getCommaAndSeperatedArray } from "@/functions/array.js";
 import EventMeetingFoodServices from "./Food Services Of Event/EventMeetingFoodServices.jsx";
 import { wantFoodServiceConstants } from "@/constant string files/eventsMeetingRoomImportantConstants.js";
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
+import { convertToINR } from '@/functions/currency.js';
 
 
 const boxStyle = {
@@ -77,7 +77,7 @@ function EventMeetingMultipleDateContinuousBookingInfo(props){
             </p>
             <p className={styles.eventMeetingBookingEachInfo}>
                 <span className={styles.eventMeetingBookingInfoEachInfoTitle}>Total Price of Event/Meeting Room: </span>
-                {CURRENCY_SYMBOL}{eachEventMeetingBookingInfo.totalPriceEventMeetingRoom}
+                {convertToINR(eachEventMeetingBookingInfo.totalPriceEventMeetingRoom)}
             </p>
             <div className={styles.buttonContainer}>
                 {(eachEventMeetingBookingInfo.wantFoodServices == wantFoodServiceConstants.WANT_FOOD_SERVICE_YES) &&

@@ -10,7 +10,7 @@ import Paper from '@mui/material/Paper';
 
 import { getDatesInRangeInclusiveBothDate, convertDateTextToDate } from '@/functions/date.js';
 import PriceDetailsEachDate from './PriceDetailsEachDate.jsx';
-import { CURRENCY_SYMBOL } from "@/constant string files/commonConstants.js";
+import { convertToINR } from '@/functions/currency.js';
 
 
 function PriceDetailsAllDates(props){
@@ -104,7 +104,7 @@ function PriceDetailsAllDates(props){
                             <TableCell></TableCell>
                             <TableCell></TableCell>
                             <TableCell></TableCell>
-                            <TableCell sx={totalStyling} align="right">{CURRENCY_SYMBOL}{totalPriceForAllDay}</TableCell>
+                            <TableCell sx={totalStyling} align="right">{convertToINR(totalPriceForAllDay)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>

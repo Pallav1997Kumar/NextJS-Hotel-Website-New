@@ -3,6 +3,7 @@ import Image from 'next/image';
 import React, { useState } from "react";
 import Link from 'next/link';
 import Button from '@mui/material/Button';
+import { useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { wrapper } from '@/redux store/storePersistance.js';
 
@@ -34,6 +35,7 @@ function AllCartsComponent(){
 function AllCartsComponentFunctionalComponent(){
 
     const dispatch = useDispatch();
+    const router = useRouter();
 
     const allRoomBookingCart = useSelector((reduxStore) => reduxStore.roomCartSlice.roomCart);
     const allDiningBookingCart = useSelector((reduxStore) => reduxStore.diningCartSlice.diningCart);
